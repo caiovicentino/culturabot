@@ -6,8 +6,8 @@
     {
       "layers" : [
         {
-          "image-name" : "moltbot-mac.png",
-          "name" : "moltbot-mac",
+          "image-name" : "culturabuilder-mac.png",
+          "name" : "culturabuilder-mac",
           "position" : {
             "scale" : 1.07,
             "translation-in-points" : [

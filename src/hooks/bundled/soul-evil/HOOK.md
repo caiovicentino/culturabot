@@ -1,15 +1,15 @@
 ---
 name: soul-evil
 description: "Swap SOUL.md with SOUL_EVIL.md during a purge window or by random chance"
-homepage: https://docs.molt.bot/hooks/soul-evil
+homepage: https://docs.culturabuilder.com/hooks/soul-evil
 metadata:
   {
-    "moltbot":
+    "culturabuilder":
       {
         "emoji": "😈",
         "events": ["agent:bootstrap"],
         "requires": { "config": ["hooks.internal.entries.soul-evil.enabled"] },
-        "install": [{ "id": "bundled", "kind": "bundled", "label": "Bundled with Moltbot" }],
+        "install": [{ "id": "bundled", "kind": "bundled", "label": "Bundled with Culturabuilder" }],
       },
   }
 ---
@@ -31,7 +31,7 @@ You can change the filename via hook config.
 
 ## Configuration
 
-Add this to your config (`~/.clawdbot/moltbot.json`):
+Add this to your config (`~/.culturabuilder/culturabuilder.json`):
 
 ```json
 {
@@ -67,5 +67,5 @@ Add this to your config (`~/.clawdbot/moltbot.json`):
 ## Enable
 
 ```bash
-moltbot hooks enable soul-evil
+culturabuilder hooks enable soul-evil
 ```

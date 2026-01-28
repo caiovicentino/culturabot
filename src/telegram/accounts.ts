@@ -1,4 +1,4 @@
-import type { MoltbotConfig } from "../config/config.js";
+import type { CulturabuilderConfig } from "../config/config.js";
 import type { TelegramAccountConfig } from "../config/types.js";
 import { isTruthyEnvValue } from "../infra/env.js";
 import { listBoundAccountIds, resolveDefaultAgentBoundAccountId } from "../routing/bindings.js";
@@ -6,7 +6,7 @@ import { DEFAULT_ACCOUNT_ID, normalizeAccountId } from "../routing/session-key.j
 import { resolveTelegramToken } from "./token.js";
 
 const debugAccounts = (...args: unknown[]) => {
-  if (isTruthyEnvValue(process.env.CLAWDBOT_DEBUG_TELEGRAM_ACCOUNTS)) {
+  if (isTruthyEnvValue(process.env.CULTURABUILDER_DEBUG_TELEGRAM_ACCOUNTS)) {
     console.warn("[telegram:accounts]", ...args);
   }
 };
@@ -20,7 +20,7 @@ export type ResolvedTelegramAccount = {
   config: TelegramAccountConfig;
 };
 
-function listConfiguredAccountIds(cfg: MoltbotConfig): string[] {
+function listConfiguredAccountIds(cfg: CulturabuilderConfig): string[] {
   const accounts = cfg.channels?.telegram?.accounts;
   if (!accounts || typeof accounts !== "object") return [];
   const ids = new Set<string>();
@@ -31,7 +31,7 @@ function listConfiguredAccountIds(cfg: MoltbotConfig): string[] {
   return [...ids];
 }
 
-export function listTelegramAccountIds(cfg: MoltbotConfig): string[] {
+export function listTelegramAccountIds(cfg: CulturabuilderConfig): string[] {
   const ids = Array.from(
     new Set([...listConfiguredAccountIds(cfg), ...listBoundAccountIds(cfg, "telegram")]),
   );
@@ -40,7 +40,7 @@ export function listTelegramAccountIds(cfg: MoltbotConfig): string[] {
   return ids.sort((a, b) => a.localeCompare(b));
 }
 
-export function resolveDefaultTelegramAccountId(cfg: MoltbotConfig): string {
+export function resolveDefaultTelegramAccountId(cfg: CulturabuilderConfig): string {
   const boundDefault = resolveDefaultAgentBoundAccountId(cfg, "telegram");
   if (boundDefault) return boundDefault;
   const ids = listTelegramAccountIds(cfg);
@@ -49,7 +49,7 @@ export function resolveDefaultTelegramAccountId(cfg: MoltbotConfig): string {
 }
 
 function resolveAccountConfig(
-  cfg: MoltbotConfig,
+  cfg: CulturabuilderConfig,
   accountId: string,
 ): TelegramAccountConfig | undefined {
   const accounts = cfg.channels?.telegram?.accounts;
@@ -61,7 +61,10 @@ function resolveAccountConfig(
   return matchKey ? (accounts[matchKey] as TelegramAccountConfig | undefined) : undefined;
 }
 
-function mergeTelegramAccountConfig(cfg: MoltbotConfig, accountId: string): TelegramAccountConfig {
+function mergeTelegramAccountConfig(
+  cfg: CulturabuilderConfig,
+  accountId: string,
+): TelegramAccountConfig {
   const { accounts: _ignored, ...base } = (cfg.channels?.telegram ??
     {}) as TelegramAccountConfig & { accounts?: unknown };
   const account = resolveAccountConfig(cfg, accountId) ?? {};
@@ -69,7 +72,7 @@ function mergeTelegramAccountConfig(cfg: MoltbotConfig, accountId: string): Tele
 }
 
 export function resolveTelegramAccount(params: {
-  cfg: MoltbotConfig;
+  cfg: CulturabuilderConfig;
   accountId?: string | null;
 }): ResolvedTelegramAccount {
   const hasExplicitAccountId = Boolean(params.accountId?.trim());
@@ -110,7 +113,7 @@ export function resolveTelegramAccount(params: {
   return fallback;
 }
 
-export function listEnabledTelegramAccounts(cfg: MoltbotConfig): ResolvedTelegramAccount[] {
+export function listEnabledTelegramAccounts(cfg: CulturabuilderConfig): ResolvedTelegramAccount[] {
   return listTelegramAccountIds(cfg)
     .map((accountId) => resolveTelegramAccount({ cfg, accountId }))
     .filter((account) => account.enabled);

@@ -1,52 +1,58 @@
-# Contributing to Moltbot
+# Contribuindo para o CulturaBuilder
 
-Welcome to the lobster tank! 🦞
+Bem-vindo ao CulturaBuilder -- a maior comunidade de builders do Brasil!
 
-## Quick Links
-- **GitHub:** https://github.com/moltbot/moltbot
-- **Discord:** https://discord.gg/qkhbAGHRBT
-- **X/Twitter:** [@steipete](https://x.com/steipete) / [@moltbot](https://x.com/moltbot)
+Agradecemos seu interesse em contribuir. Este documento descreve como participar do projeto e ajudar a comunidade a crescer.
 
-## Maintainers
+## Links Rapidos
 
-- **Peter Steinberger** - Benevolent Dictator
-  - GitHub: [@steipete](https://github.com/steipete) · X: [@steipete](https://x.com/steipete)
+- **GitHub:** [github.com/caiovicentino/culturabot](https://github.com/caiovicentino/culturabot)
+- **Website:** [culturabuilder.com](https://culturabuilder.com)
 
-- **Shadow** - Discord + Slack subsystem
-  - GitHub: [@thewilloftheshadow](https://github.com/thewilloftheshadow) · X: [@4shad0wed](https://x.com/4shad0wed)
+## Nossa Comunidade
 
-- **Jos** - Telegram, API, Nix mode
-  - GitHub: [@joshp123](https://github.com/joshp123) · X: [@jjpcodes](https://x.com/jjpcodes)
+O CulturaBuilder reune mais de **2.000 builders** aprendendo Vibe Coding e AI juntos. Oferecemos:
 
-## How to Contribute
-1. **Bugs & small fixes** → Open a PR!
-2. **New features / architecture** → Start a [GitHub Discussion](https://github.com/moltbot/moltbot/discussions) or ask in Discord first
-3. **Questions** → Discord #setup-help
+- Mentorias semanais ao vivo
+- Projetos colaborativos de codigo aberto
+- Conteudo educacional sobre Vibe Coding, AI e desenvolvimento moderno
+- Networking entre builders de todo o Brasil
 
-## Before You PR
-- Test locally with your Moltbot instance
-- Run linter: `npm run lint`
-- Keep PRs focused (one thing per PR)
-- Describe what & why
+## Como Contribuir
 
-## AI/Vibe-Coded PRs Welcome! 🤖
+1. **Bugs e correcoes** -- Abra um PR diretamente!
+2. **Novas funcionalidades / arquitetura** -- Inicie uma [GitHub Discussion](https://github.com/caiovicentino/culturabot/discussions) antes de comecar a implementacao.
+3. **Duvidas e discussoes** -- Use as [Discussions](https://github.com/caiovicentino/culturabot/discussions) no GitHub ou entre em contato pelo site.
 
-Built with Codex, Claude, or other AI tools? **Awesome - just mark it!**
+## Antes de Enviar um PR
 
-Please include in your PR:
-- [ ] Mark as AI-assisted in the PR title or description
-- [ ] Note the degree of testing (untested / lightly tested / fully tested)
-- [ ] Include prompts or session logs if possible (super helpful!)
-- [ ] Confirm you understand what the code does
+- Teste localmente com sua instancia do CulturaBuilder
+- Execute o linter: `npm run lint`
+- Mantenha PRs focados (uma mudanca por PR)
+- Descreva **o que** foi alterado e **por que**
+- Siga os padroes de codigo existentes no projeto
 
-AI PRs are first-class citizens here. We just want transparency so reviewers know what to look for.
+## PRs com AI/Vibe-Coded sao Bem-Vindos!
 
-## Current Focus & Roadmap 🗺
+Construiu com Claude, Codex, Cursor ou outra ferramenta de AI? **Otimo -- so marque isso!**
 
-We are currently prioritizing:
-- **Stability**: Fixing edge cases in channel connections (WhatsApp/Telegram).
-- **UX**: Improving the onboarding wizard and error messages.
-- **Skills**: Expanding the library of bundled skills and improving the Skill Creation developer experience.
-- **Performance**: Optimizing token usage and compaction logic.
+Por favor inclua no seu PR:
 
-Check the [GitHub Issues](https://github.com/moltbot/moltbot/issues) for "good first issue" labels!
+- [ ] Indique que foi assistido por AI no titulo ou descricao do PR
+- [ ] Descreva o nivel de teste (nao testado / parcialmente testado / totalmente testado)
+- [ ] Inclua prompts ou logs da sessao se possivel (muito util para revisao!)
+- [ ] Confirme que voce entende o que o codigo faz
+
+PRs assistidos por AI sao cidadaos de primeira classe aqui. Apenas pedimos transparencia para que os revisores saibam o que procurar.
+
+## Foco Atual e Roadmap
+
+Estamos priorizando atualmente:
+
+- **Vibe Coding**: Expandindo ferramentas e conteudo educacional sobre Vibe Coding
+- **Educacao em AI**: Criando materiais e tutoriais acessiveis sobre inteligencia artificial aplicada
+- **Crescimento da Comunidade**: Ampliando o alcance para mais builders em todo o Brasil
+- **Estabilidade**: Corrigindo edge cases e melhorando a experiencia do usuario
+- **Skills**: Expandindo a biblioteca de skills e melhorando a experiencia de desenvolvimento
+
+Confira as [GitHub Issues](https://github.com/caiovicentino/culturabot/issues) com o label "good first issue" para comecar!

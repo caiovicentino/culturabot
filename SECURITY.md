@@ -1,59 +1,59 @@
-# Security Policy
+# Politica de Seguranca - CulturaBuilder
 
-If you believe you've found a security issue in Moltbot, please report it privately.
+Se voce acredita ter encontrado um problema de seguranca no CulturaBuilder, por favor reporte de forma privada.
 
-## Reporting
+## Como Reportar
 
-- Email: `steipete@gmail.com`
-- What to include: reproduction steps, impact assessment, and (if possible) a minimal PoC.
+- Email: `contato@culturabuilder.com`
+- O que incluir: passos para reproducao, avaliacao de impacto e (se possivel) um PoC minimo.
 
-## Operational Guidance
+## Orientacoes Operacionais
 
-For threat model + hardening guidance (including `moltbot security audit --deep` and `--fix`), see:
+Para modelo de ameacas e orientacoes de hardening (incluindo `culturabuilder security audit --deep` e `--fix`), consulte:
 
-- `https://docs.molt.bot/gateway/security`
+- `https://docs.culturabuilder.com/gateway/security`
 
-### Web Interface Safety
+### Seguranca da Interface Web
 
-Moltbot's web interface is intended for local use only. Do **not** bind it to the public internet; it is not hardened for public exposure.
+A interface web do CulturaBuilder e destinada apenas para uso local. **Nao** exponha na internet publica; ela nao esta preparada para exposicao publica.
 
-## Runtime Requirements
+## Requisitos de Runtime
 
-### Node.js Version
+### Versao do Node.js
 
-Moltbot requires **Node.js 22.12.0 or later** (LTS). This version includes important security patches:
+O CulturaBuilder requer **Node.js 22.12.0 ou posterior** (LTS). Esta versao inclui patches de seguranca importantes:
 
-- CVE-2025-59466: async_hooks DoS vulnerability
-- CVE-2026-21636: Permission model bypass vulnerability
+- CVE-2025-59466: Vulnerabilidade DoS em async_hooks
+- CVE-2026-21636: Vulnerabilidade de bypass no modelo de permissoes
 
-Verify your Node.js version:
+Verifique sua versao do Node.js:
 
 ```bash
-node --version  # Should be v22.12.0 or later
+node --version  # Deve ser v22.12.0 ou posterior
 ```
 
-### Docker Security
+### Seguranca Docker
 
-When running Moltbot in Docker:
+Ao executar o CulturaBuilder em Docker:
 
-1. The official image runs as a non-root user (`node`) for reduced attack surface
-2. Use `--read-only` flag when possible for additional filesystem protection
-3. Limit container capabilities with `--cap-drop=ALL`
+1. A imagem oficial roda como usuario nao-root (`node`) para reduzir a superficie de ataque
+2. Use a flag `--read-only` quando possivel para protecao adicional do filesystem
+3. Limite as capacidades do container com `--cap-drop=ALL`
 
-Example secure Docker run:
+Exemplo de execucao Docker segura:
 
 ```bash
 docker run --read-only --cap-drop=ALL \
-  -v moltbot-data:/app/data \
-  moltbot/moltbot:latest
+  -v culturabuilder-data:/app/data \
+  culturabuilder/culturabuilder:latest
 ```
 
-## Security Scanning
+## Varredura de Seguranca
 
-This project uses `detect-secrets` for automated secret detection in CI/CD.
-See `.detect-secrets.cfg` for configuration and `.secrets.baseline` for the baseline.
+Este projeto usa `detect-secrets` para deteccao automatizada de segredos no CI/CD.
+Consulte `.detect-secrets.cfg` para configuracao e `.secrets.baseline` para o baseline.
 
-Run locally:
+Execute localmente:
 
 ```bash
 pip install detect-secrets==1.5.0

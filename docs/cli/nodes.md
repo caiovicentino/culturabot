@@ -1,11 +1,11 @@
 ---
-summary: "CLI reference for `moltbot nodes` (list/status/approve/invoke, camera/canvas/screen)"
+summary: "CLI reference for `culturabuilder nodes` (list/status/approve/invoke, camera/canvas/screen)"
 read_when:
   - You’re managing paired nodes (cameras, screen, canvas)
   - You need to approve requests or invoke node commands
 ---
 
-# `moltbot nodes`
+# `culturabuilder nodes`
 
 Manage paired nodes (devices) and invoke node capabilities.
 
@@ -20,14 +20,14 @@ Common options:
 ## Common commands
 
 ```bash
-moltbot nodes list
-moltbot nodes list --connected
-moltbot nodes list --last-connected 24h
-moltbot nodes pending
-moltbot nodes approve <requestId>
-moltbot nodes status
-moltbot nodes status --connected
-moltbot nodes status --last-connected 24h
+culturabuilder nodes list
+culturabuilder nodes list --connected
+culturabuilder nodes list --last-connected 24h
+culturabuilder nodes pending
+culturabuilder nodes approve <requestId>
+culturabuilder nodes status
+culturabuilder nodes status --connected
+culturabuilder nodes status --last-connected 24h
 ```
 
 `nodes list` prints pending/paired tables. Paired rows include the most recent connect age (Last Connect).
@@ -37,10 +37,10 @@ filter to nodes that connected within a duration (e.g. `24h`, `7d`).
 ## Invoke / run
 
 ```bash
-moltbot nodes invoke --node <id|name|ip> --command <command> --params <json>
-moltbot nodes run --node <id|name|ip> <command...>
-moltbot nodes run --raw "git status"
-moltbot nodes run --agent main --node <id|name|ip> --raw "git status"
+culturabuilder nodes invoke --node <id|name|ip> --command <command> --params <json>
+culturabuilder nodes run --node <id|name|ip> <command...>
+culturabuilder nodes run --raw "git status"
+culturabuilder nodes run --agent main --node <id|name|ip> --raw "git status"
 ```
 
 Invoke flags:

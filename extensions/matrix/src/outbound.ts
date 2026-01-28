@@ -1,4 +1,4 @@
-import type { ChannelOutboundAdapter } from "clawdbot/plugin-sdk";
+import type { ChannelOutboundAdapter } from "culturabuilder/plugin-sdk";
 
 import { getMatrixRuntime } from "./runtime.js";
 import { sendMessageMatrix, sendPollMatrix } from "./matrix/send.js";

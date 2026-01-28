@@ -1,5 +1,5 @@
 ---
-summary: "Moltbot plugins/extensions: discovery, config, and safety"
+summary: "Culturabuilder plugins/extensions: discovery, config, and safety"
 read_when:
   - Adding or modifying plugins/extensions
   - Documenting plugin install or load rules
@@ -8,11 +8,11 @@ read_when:
 
 ## Quick start (new to plugins?)
 
-A plugin is just a **small code module** that extends Moltbot with extra
+A plugin is just a **small code module** that extends Culturabuilder with extra
 features (commands, tools, and Gateway RPC).
 
 Most of the time, you’ll use plugins when you want a feature that’s not built
-into core Moltbot yet (or you want to keep optional features out of your main
+into core Culturabuilder yet (or you want to keep optional features out of your main
 install).
 
 Fast path:
@@ -20,13 +20,13 @@ Fast path:
 1) See what’s already loaded:
 
 ```bash
-moltbot plugins list
+culturabuilder plugins list
 ```
 
 2) Install an official plugin (example: Voice Call):
 
 ```bash
-moltbot plugins install @moltbot/voice-call
+culturabuilder plugins install @culturabuilder/voice-call
 ```
 
 3) Restart the Gateway, then configure under `plugins.entries.<id>.config`.
@@ -35,21 +35,21 @@ See [Voice Call](/plugins/voice-call) for a concrete example plugin.
 
 ## Available plugins (official)
 
-- Microsoft Teams is plugin-only as of 2026.1.15; install `@moltbot/msteams` if you use Teams.
+- Microsoft Teams is plugin-only as of 2026.1.15; install `@culturabuilder/msteams` if you use Teams.
 - Memory (Core) — bundled memory search plugin (enabled by default via `plugins.slots.memory`)
 - Memory (LanceDB) — bundled long-term memory plugin (auto-recall/capture; set `plugins.slots.memory = "memory-lancedb"`)
-- [Voice Call](/plugins/voice-call) — `@moltbot/voice-call`
-- [Zalo Personal](/plugins/zalouser) — `@moltbot/zalouser`
-- [Matrix](/channels/matrix) — `@moltbot/matrix`
-- [Nostr](/channels/nostr) — `@moltbot/nostr`
-- [Zalo](/channels/zalo) — `@moltbot/zalo`
-- [Microsoft Teams](/channels/msteams) — `@moltbot/msteams`
+- [Voice Call](/plugins/voice-call) — `@culturabuilder/voice-call`
+- [Zalo Personal](/plugins/zalouser) — `@culturabuilder/zalouser`
+- [Matrix](/channels/matrix) — `@culturabuilder/matrix`
+- [Nostr](/channels/nostr) — `@culturabuilder/nostr`
+- [Zalo](/channels/zalo) — `@culturabuilder/zalo`
+- [Microsoft Teams](/channels/msteams) — `@culturabuilder/msteams`
 - Google Antigravity OAuth (provider auth) — bundled as `google-antigravity-auth` (disabled by default)
 - Gemini CLI OAuth (provider auth) — bundled as `google-gemini-cli-auth` (disabled by default)
 - Qwen OAuth (provider auth) — bundled as `qwen-portal-auth` (disabled by default)
 - Copilot Proxy (provider auth) — local VS Code Copilot Proxy bridge; distinct from built-in `github-copilot` device login (bundled, disabled by default)
 
-Moltbot plugins are **TypeScript modules** loaded at runtime via jiti. **Config
+Culturabuilder plugins are **TypeScript modules** loaded at runtime via jiti. **Config
 validation does not execute plugin code**; it uses the plugin manifest and JSON
 Schema instead. See [Plugin manifest](/plugins/manifest).
 
@@ -73,7 +73,7 @@ Plugins can access selected core helpers via `api.runtime`. For telephony TTS:
 
 ```ts
 const result = await api.runtime.tts.textToSpeechTelephony({
-  text: "Hello from Moltbot",
+  text: "Hello from Culturabuilder",
   cfg: api.config,
 });
 ```
@@ -85,27 +85,27 @@ Notes:
 
 ## Discovery & precedence
 
-Moltbot scans, in order:
+Culturabuilder scans, in order:
 
 1) Config paths
 - `plugins.load.paths` (file or directory)
 
 2) Workspace extensions
-- `<workspace>/.clawdbot/extensions/*.ts`
-- `<workspace>/.clawdbot/extensions/*/index.ts`
+- `<workspace>/.culturabuilder/extensions/*.ts`
+- `<workspace>/.culturabuilder/extensions/*/index.ts`
 
 3) Global extensions
-- `~/.clawdbot/extensions/*.ts`
-- `~/.clawdbot/extensions/*/index.ts`
+- `~/.culturabuilder/extensions/*.ts`
+- `~/.culturabuilder/extensions/*/index.ts`
 
-4) Bundled extensions (shipped with Moltbot, **disabled by default**)
-- `<moltbot>/extensions/*`
+4) Bundled extensions (shipped with Culturabuilder, **disabled by default**)
+- `<culturabuilder>/extensions/*`
 
 Bundled plugins must be enabled explicitly via `plugins.entries.<id>.enabled`
-or `moltbot plugins enable <id>`. Installed plugins are enabled by default,
+or `culturabuilder plugins enable <id>`. Installed plugins are enabled by default,
 but can be disabled the same way.
 
-Each plugin must include a `moltbot.plugin.json` file in its root. If a path
+Each plugin must include a `culturabuilder.plugin.json` file in its root. If a path
 points at a file, the plugin root is the file's directory and must contain the
 manifest.
 
@@ -114,12 +114,12 @@ wins and lower-precedence copies are ignored.
 
 ### Package packs
 
-A plugin directory may include a `package.json` with `moltbot.extensions`:
+A plugin directory may include a `package.json` with `culturabuilder.extensions`:
 
 ```json
 {
   "name": "my-pack",
-  "moltbot": {
+  "culturabuilder": {
     "extensions": ["./src/safety.ts", "./src/tools.ts"]
   }
 }
@@ -133,15 +133,15 @@ If your plugin imports npm deps, install them in that directory so
 
 ### Channel catalog metadata
 
-Channel plugins can advertise onboarding metadata via `moltbot.channel` and
-install hints via `moltbot.install`. This keeps the core catalog data-free.
+Channel plugins can advertise onboarding metadata via `culturabuilder.channel` and
+install hints via `culturabuilder.install`. This keeps the core catalog data-free.
 
 Example:
 
 ```json
 {
-  "name": "@moltbot/nextcloud-talk",
-  "moltbot": {
+  "name": "@culturabuilder/nextcloud-talk",
+  "culturabuilder": {
     "extensions": ["./index.ts"],
     "channel": {
       "id": "nextcloud-talk",
@@ -154,7 +154,7 @@ Example:
       "aliases": ["nc-talk", "nc"]
     },
     "install": {
-      "npmSpec": "@moltbot/nextcloud-talk",
+      "npmSpec": "@culturabuilder/nextcloud-talk",
       "localPath": "extensions/nextcloud-talk",
       "defaultChoice": "npm"
     }
@@ -162,15 +162,15 @@ Example:
 }
 ```
 
-Moltbot can also merge **external channel catalogs** (for example, an MPM
+Culturabuilder can also merge **external channel catalogs** (for example, an MPM
 registry export). Drop a JSON file at one of:
-- `~/.clawdbot/mpm/plugins.json`
-- `~/.clawdbot/mpm/catalog.json`
-- `~/.clawdbot/plugins/catalog.json`
+- `~/.culturabuilder/mpm/plugins.json`
+- `~/.culturabuilder/mpm/catalog.json`
+- `~/.culturabuilder/plugins/catalog.json`
 
-Or point `CLAWDBOT_PLUGIN_CATALOG_PATHS` (or `CLAWDBOT_MPM_CATALOG_PATHS`) at
+Or point `CULTURABUILDER_PLUGIN_CATALOG_PATHS` (or `CULTURABUILDER_MPM_CATALOG_PATHS`) at
 one or more JSON files (comma/semicolon/`PATH`-delimited). Each file should
-contain `{ "entries": [ { "name": "@scope/pkg", "moltbot": { "channel": {...}, "install": {...} } } ] }`.
+contain `{ "entries": [ { "name": "@scope/pkg", "culturabuilder": { "channel": {...}, "install": {...} } } ] }`.
 
 ## Plugin IDs
 
@@ -179,7 +179,7 @@ Default plugin ids:
 - Package packs: `package.json` `name`
 - Standalone file: file base name (`~/.../voice-call.ts` → `voice-call`)
 
-If a plugin exports `id`, Moltbot uses it but warns when it doesn’t match the
+If a plugin exports `id`, Culturabuilder uses it but warns when it doesn’t match the
 configured id.
 
 ## Config
@@ -212,7 +212,7 @@ Validation rules (strict):
 - Unknown `channels.<id>` keys are **errors** unless a plugin manifest declares
   the channel id.
 - Plugin config is validated using the JSON Schema embedded in
-  `moltbot.plugin.json` (`configSchema`).
+  `culturabuilder.plugin.json` (`configSchema`).
 - If a plugin is disabled, its config is preserved and a **warning** is emitted.
 
 ## Plugin slots (exclusive categories)
@@ -237,7 +237,7 @@ are disabled with diagnostics.
 
 The Control UI uses `config.schema` (JSON Schema + `uiHints`) to render better forms.
 
-Moltbot augments `uiHints` at runtime based on discovered plugins:
+Culturabuilder augments `uiHints` at runtime based on discovered plugins:
 
 - Adds per-plugin labels for `plugins.entries.<id>` / `.enabled` / `.config`
 - Merges optional plugin-provided config field hints under:
@@ -269,24 +269,24 @@ Example:
 ## CLI
 
 ```bash
-moltbot plugins list
-moltbot plugins info <id>
-moltbot plugins install <path>                 # copy a local file/dir into ~/.clawdbot/extensions/<id>
-moltbot plugins install ./extensions/voice-call # relative path ok
-moltbot plugins install ./plugin.tgz           # install from a local tarball
-moltbot plugins install ./plugin.zip           # install from a local zip
-moltbot plugins install -l ./extensions/voice-call # link (no copy) for dev
-moltbot plugins install @moltbot/voice-call # install from npm
-moltbot plugins update <id>
-moltbot plugins update --all
-moltbot plugins enable <id>
-moltbot plugins disable <id>
-moltbot plugins doctor
+culturabuilder plugins list
+culturabuilder plugins info <id>
+culturabuilder plugins install <path>                 # copy a local file/dir into ~/.culturabuilder/extensions/<id>
+culturabuilder plugins install ./extensions/voice-call # relative path ok
+culturabuilder plugins install ./plugin.tgz           # install from a local tarball
+culturabuilder plugins install ./plugin.zip           # install from a local zip
+culturabuilder plugins install -l ./extensions/voice-call # link (no copy) for dev
+culturabuilder plugins install @culturabuilder/voice-call # install from npm
+culturabuilder plugins update <id>
+culturabuilder plugins update --all
+culturabuilder plugins enable <id>
+culturabuilder plugins disable <id>
+culturabuilder plugins doctor
 ```
 
 `plugins update` only works for npm installs tracked under `plugins.installs`.
 
-Plugins may also register their own top‑level commands (example: `moltbot voicecall`).
+Plugins may also register their own top‑level commands (example: `culturabuilder voicecall`).
 
 ## Plugin API (overview)
 
@@ -303,7 +303,7 @@ event-driven automation without a separate hook pack install.
 ### Example
 
 ```
-import { registerPluginHooksFromDir } from "moltbot/plugin-sdk";
+import { registerPluginHooksFromDir } from "culturabuilder/plugin-sdk";
 
 export default function register(api) {
   registerPluginHooksFromDir(api, "./hooks");
@@ -313,18 +313,18 @@ export default function register(api) {
 Notes:
 - Hook directories follow the normal hook structure (`HOOK.md` + `handler.ts`).
 - Hook eligibility rules still apply (OS/bins/env/config requirements).
-- Plugin-managed hooks show up in `moltbot hooks list` with `plugin:<id>`.
-- You cannot enable/disable plugin-managed hooks via `moltbot hooks`; enable/disable the plugin instead.
+- Plugin-managed hooks show up in `culturabuilder hooks list` with `plugin:<id>`.
+- You cannot enable/disable plugin-managed hooks via `culturabuilder hooks`; enable/disable the plugin instead.
 
 ## Provider plugins (model auth)
 
 Plugins can register **model provider auth** flows so users can run OAuth or
-API-key setup inside Moltbot (no external scripts needed).
+API-key setup inside Culturabuilder (no external scripts needed).
 
 Register a provider via `api.registerProvider(...)`. Each provider exposes one
 or more auth methods (OAuth, API key, device code, etc.). These methods power:
 
-- `moltbot models auth login --provider <id> [--method <id>]`
+- `culturabuilder models auth login --provider <id> [--method <id>]`
 
 Example:
 
@@ -536,7 +536,7 @@ Command handler context:
 - `isAuthorizedSender`: Whether the sender is an authorized user
 - `args`: Arguments passed after the command (if `acceptsArgs: true`)
 - `commandBody`: The full command text
-- `config`: The current Moltbot config
+- `config`: The current Culturabuilder config
 
 Command options:
 
@@ -598,14 +598,14 @@ it’s present in your workspace/managed skills locations.
 
 Recommended packaging:
 
-- Main package: `moltbot` (this repo)
-- Plugins: separate npm packages under `@moltbot/*` (example: `@moltbot/voice-call`)
+- Main package: `culturabuilder` (this repo)
+- Plugins: separate npm packages under `@culturabuilder/*` (example: `@culturabuilder/voice-call`)
 
 Publishing contract:
 
-- Plugin `package.json` must include `moltbot.extensions` with one or more entry files.
+- Plugin `package.json` must include `culturabuilder.extensions` with one or more entry files.
 - Entry files can be `.js` or `.ts` (jiti loads TS at runtime).
-- `moltbot plugins install <npm-spec>` uses `npm pack`, extracts into `~/.clawdbot/extensions/<id>/`, and enables it in config.
+- `culturabuilder plugins install <npm-spec>` uses `npm pack`, extracts into `~/.culturabuilder/extensions/<id>/`, and enables it in config.
 - Config key stability: scoped packages are normalized to the **unscoped** id for `plugins.entries.*`.
 
 ## Example plugin: Voice Call
@@ -614,7 +614,7 @@ This repo includes a voice‑call plugin (Twilio or log fallback):
 
 - Source: `extensions/voice-call`
 - Skill: `skills/voice-call`
-- CLI: `moltbot voicecall start|status`
+- CLI: `culturabuilder voicecall start|status`
 - Tool: `voice_call`
 - RPC: `voicecall.start`, `voicecall.status`
 - Config (twilio): `provider: "twilio"` + `twilio.accountSid/authToken/from` (optional `statusCallbackUrl`, `twimlUrl`)
@@ -635,4 +635,4 @@ Plugins run in-process with the Gateway. Treat them as trusted code:
 Plugins can (and should) ship tests:
 
 - In-repo plugins can keep Vitest tests under `src/**` (example: `src/plugins/voice-call.plugin.test.ts`).
-- Separately published plugins should run their own CI (lint/build/test) and validate `moltbot.extensions` points at the built entrypoint (`dist/index.js`).
+- Separately published plugins should run their own CI (lint/build/test) and validate `culturabuilder.extensions` points at the built entrypoint (`dist/index.js`).

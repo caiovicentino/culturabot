@@ -1,4 +1,4 @@
-import type { MoltbotConfig } from "../config/config.js";
+import type { CulturabuilderConfig } from "../config/config.js";
 import type { MemoryIndexManager } from "./manager.js";
 
 export type MemorySearchManagerResult = {
@@ -7,7 +7,7 @@ export type MemorySearchManagerResult = {
 };
 
 export async function getMemorySearchManager(params: {
-  cfg: MoltbotConfig;
+  cfg: CulturabuilderConfig;
   agentId: string;
 }): Promise<MemorySearchManagerResult> {
   try {

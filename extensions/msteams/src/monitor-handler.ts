@@ -1,4 +1,4 @@
-import type { MoltbotConfig, RuntimeEnv } from "clawdbot/plugin-sdk";
+import type { CulturabuilderConfig, RuntimeEnv } from "culturabuilder/plugin-sdk";
 import type { MSTeamsConversationStore } from "./conversation-store.js";
 import {
   buildFileInfoCard,
@@ -27,7 +27,7 @@ export type MSTeamsActivityHandler = {
 };
 
 export type MSTeamsMessageHandlerDeps = {
-  cfg: MoltbotConfig;
+  cfg: CulturabuilderConfig;
   runtime: RuntimeEnv;
   appId: string;
   adapter: MSTeamsAdapter;

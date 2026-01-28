@@ -1,7 +1,7 @@
 ---
-summary: "Use OpenAI via API keys or Codex subscription in Moltbot"
+summary: "Use OpenAI via API keys or Codex subscription in Culturabuilder"
 read_when:
-  - You want to use OpenAI models in Moltbot
+  - You want to use OpenAI models in Culturabuilder
   - You want Codex subscription auth instead of API keys
 ---
 # OpenAI
@@ -17,9 +17,9 @@ Get your API key from the OpenAI dashboard.
 ### CLI setup
 
 ```bash
-moltbot onboard --auth-choice openai-api-key
+culturabuilder onboard --auth-choice openai-api-key
 # or non-interactive
-moltbot onboard --openai-api-key "$OPENAI_API_KEY"
+culturabuilder onboard --openai-api-key "$OPENAI_API_KEY"
 ```
 
 ### Config snippet
@@ -40,10 +40,10 @@ Codex cloud requires ChatGPT sign-in, while the Codex CLI supports ChatGPT or AP
 
 ```bash
 # Run Codex OAuth in the wizard
-moltbot onboard --auth-choice openai-codex
+culturabuilder onboard --auth-choice openai-codex
 
 # Or run OAuth directly
-moltbot models auth login --provider openai-codex
+culturabuilder models auth login --provider openai-codex
 ```
 
 ### Config snippet

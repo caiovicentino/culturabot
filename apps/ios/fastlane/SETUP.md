@@ -1,4 +1,4 @@
-# fastlane setup (Moltbot iOS)
+# fastlane setup (Culturabuilder iOS)
 
 Install:
 

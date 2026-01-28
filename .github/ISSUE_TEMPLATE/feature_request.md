@@ -1,18 +1,18 @@
 ---
-name: Feature request
-about: Suggest an idea or improvement for Clawdbot.
+name: Solicitacao de feature
+about: Sugira uma ideia ou melhoria para o CulturaBuilder.
 title: "[Feature]: "
 labels: enhancement
 ---
 
-## Summary
-Describe the problem you are trying to solve or the opportunity you see.
+## Resumo
+Descreva o problema que voce esta tentando resolver ou a oportunidade que voce ve.
 
-## Proposed solution
-What would you like Clawdbot to do?
+## Solucao proposta
+O que voce gostaria que o CulturaBuilder fizesse?
 
-## Alternatives considered
-Any other approaches you have considered?
+## Alternativas consideradas
+Alguma outra abordagem que voce considerou?
 
-## Additional context
-Links, screenshots, or related issues.
+## Contexto adicional
+Links, screenshots ou issues relacionadas.

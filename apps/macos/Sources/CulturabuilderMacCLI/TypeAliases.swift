@@ -1,0 +1,5 @@
+import CulturabuilderKit
+import CulturabuilderProtocol
+
+typealias ProtoAnyCodable = CulturabuilderProtocol.AnyCodable
+typealias KitAnyCodable = CulturabuilderKit.AnyCodable

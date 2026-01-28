@@ -1,9 +1,9 @@
 {
-  "name": "@moltbot/telegram",
+  "name": "@culturabuilder/telegram",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot Telegram channel plugin",
-  "moltbot": {
+  "description": "Culturabuilder Telegram channel plugin",
+  "culturabuilder": {
     "extensions": [
       "./index.ts"
     ]

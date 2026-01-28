@@ -1,4 +1,4 @@
-import type { MoltbotConfig } from "../config/config.js";
+import type { CulturabuilderConfig } from "../config/config.js";
 import { defaultSlotIdForKey } from "./slots.js";
 import type { PluginRecord } from "./registry.js";
 
@@ -49,7 +49,7 @@ const normalizePluginEntries = (entries: unknown): NormalizedPluginsConfig["entr
 };
 
 export const normalizePluginsConfig = (
-  config?: MoltbotConfig["plugins"],
+  config?: CulturabuilderConfig["plugins"],
 ): NormalizedPluginsConfig => {
   const memorySlot = normalizeSlotValue(config?.slots?.memory);
   return {

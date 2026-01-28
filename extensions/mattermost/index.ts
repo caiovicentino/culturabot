@@ -1,5 +1,5 @@
-import type { MoltbotPluginApi } from "clawdbot/plugin-sdk";
-import { emptyPluginConfigSchema } from "clawdbot/plugin-sdk";
+import type { CulturabuilderPluginApi } from "culturabuilder/plugin-sdk";
+import { emptyPluginConfigSchema } from "culturabuilder/plugin-sdk";
 
 import { mattermostPlugin } from "./src/channel.js";
 import { setMattermostRuntime } from "./src/runtime.js";
@@ -9,7 +9,7 @@ const plugin = {
   name: "Mattermost",
   description: "Mattermost channel plugin",
   configSchema: emptyPluginConfigSchema(),
-  register(api: MoltbotPluginApi) {
+  register(api: CulturabuilderPluginApi) {
     setMattermostRuntime(api.runtime);
     api.registerChannel({ plugin: mattermostPlugin });
   },

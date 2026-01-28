@@ -8,7 +8,7 @@ read_when:
 
 # Logging
 
-Moltbot logs in two places:
+Culturabuilder logs in two places:
 
 - **File logs** (JSON lines) written by the Gateway.
 - **Console output** shown in terminals and the Control UI.
@@ -20,16 +20,16 @@ levels and formats.
 
 By default, the Gateway writes a rolling log file under:
 
-`/tmp/moltbot/moltbot-YYYY-MM-DD.log`
+`/tmp/culturabuilder/culturabuilder-YYYY-MM-DD.log`
 
 The date uses the gateway host's local timezone.
 
-You can override this in `~/.clawdbot/moltbot.json`:
+You can override this in `~/.culturabuilder/culturabuilder.json`:
 
 ```json
 {
   "logging": {
-    "file": "/path/to/moltbot.log"
+    "file": "/path/to/culturabuilder.log"
   }
 }
 ```
@@ -41,7 +41,7 @@ You can override this in `~/.clawdbot/moltbot.json`:
 Use the CLI to tail the gateway log file via RPC:
 
 ```bash
-moltbot logs --follow
+culturabuilder logs --follow
 ```
 
 Output modes:
@@ -62,7 +62,7 @@ In JSON mode, the CLI emits `type`-tagged objects:
 If the Gateway is unreachable, the CLI prints a short hint to run:
 
 ```bash
-moltbot doctor
+culturabuilder doctor
 ```
 
 ### Control UI (web)
@@ -75,7 +75,7 @@ See [/web/control-ui](/web/control-ui) for how to open it.
 To filter channel activity (WhatsApp/Telegram/etc), use:
 
 ```bash
-moltbot channels logs --channel whatsapp
+culturabuilder channels logs --channel whatsapp
 ```
 
 ## Log formats
@@ -97,13 +97,13 @@ Console formatting is controlled by `logging.consoleStyle`.
 
 ## Configuring logging
 
-All logging configuration lives under `logging` in `~/.clawdbot/moltbot.json`.
+All logging configuration lives under `logging` in `~/.culturabuilder/culturabuilder.json`.
 
 ```json
 {
   "logging": {
     "level": "info",
-    "file": "/tmp/moltbot/moltbot-YYYY-MM-DD.log",
+    "file": "/tmp/culturabuilder/culturabuilder-YYYY-MM-DD.log",
     "consoleLevel": "info",
     "consoleStyle": "pretty",
     "redactSensitive": "tools",
@@ -151,7 +151,7 @@ diagnostics + the exporter plugin are enabled.
 
 - **OpenTelemetry (OTel)**: the data model + SDKs for traces, metrics, and logs.
 - **OTLP**: the wire protocol used to export OTel data to a collector/backend.
-- Moltbot exports via **OTLP/HTTP (protobuf)** today.
+- Culturabuilder exports via **OTLP/HTTP (protobuf)** today.
 
 ### Signals exported
 
@@ -208,7 +208,7 @@ Flags are case-insensitive and support wildcards (e.g. `telegram.*` or `*`).
 Env override (one-off):
 
 ```
-CLAWDBOT_DIAGNOSTICS=telegram.http,telegram.payload
+CULTURABUILDER_DIAGNOSTICS=telegram.http,telegram.payload
 ```
 
 Notes:
@@ -237,7 +237,7 @@ works with any OpenTelemetry collector/backend that accepts OTLP/HTTP.
       "enabled": true,
       "endpoint": "http://otel-collector:4318",
       "protocol": "http/protobuf",
-      "serviceName": "moltbot-gateway",
+      "serviceName": "culturabuilder-gateway",
       "traces": true,
       "metrics": true,
       "logs": true,
@@ -249,7 +249,7 @@ works with any OpenTelemetry collector/backend that accepts OTLP/HTTP.
 ```
 
 Notes:
-- You can also enable the plugin with `moltbot plugins enable diagnostics-otel`.
+- You can also enable the plugin with `culturabuilder plugins enable diagnostics-otel`.
 - `protocol` currently supports `http/protobuf` only. `grpc` is ignored.
 - Metrics include token usage, cost, context size, run duration, and message-flow
   counters/histograms (webhooks, queueing, session state, queue depth/wait).
@@ -262,58 +262,58 @@ Notes:
 ### Exported metrics (names + types)
 
 Model usage:
-- `moltbot.tokens` (counter, attrs: `moltbot.token`, `moltbot.channel`,
-  `moltbot.provider`, `moltbot.model`)
-- `moltbot.cost.usd` (counter, attrs: `moltbot.channel`, `moltbot.provider`,
-  `moltbot.model`)
-- `moltbot.run.duration_ms` (histogram, attrs: `moltbot.channel`,
-  `moltbot.provider`, `moltbot.model`)
-- `moltbot.context.tokens` (histogram, attrs: `moltbot.context`,
-  `moltbot.channel`, `moltbot.provider`, `moltbot.model`)
+- `culturabuilder.tokens` (counter, attrs: `culturabuilder.token`, `culturabuilder.channel`,
+  `culturabuilder.provider`, `culturabuilder.model`)
+- `culturabuilder.cost.usd` (counter, attrs: `culturabuilder.channel`, `culturabuilder.provider`,
+  `culturabuilder.model`)
+- `culturabuilder.run.duration_ms` (histogram, attrs: `culturabuilder.channel`,
+  `culturabuilder.provider`, `culturabuilder.model`)
+- `culturabuilder.context.tokens` (histogram, attrs: `culturabuilder.context`,
+  `culturabuilder.channel`, `culturabuilder.provider`, `culturabuilder.model`)
 
 Message flow:
-- `moltbot.webhook.received` (counter, attrs: `moltbot.channel`,
-  `moltbot.webhook`)
-- `moltbot.webhook.error` (counter, attrs: `moltbot.channel`,
-  `moltbot.webhook`)
-- `moltbot.webhook.duration_ms` (histogram, attrs: `moltbot.channel`,
-  `moltbot.webhook`)
-- `moltbot.message.queued` (counter, attrs: `moltbot.channel`,
-  `moltbot.source`)
-- `moltbot.message.processed` (counter, attrs: `moltbot.channel`,
-  `moltbot.outcome`)
-- `moltbot.message.duration_ms` (histogram, attrs: `moltbot.channel`,
-  `moltbot.outcome`)
+- `culturabuilder.webhook.received` (counter, attrs: `culturabuilder.channel`,
+  `culturabuilder.webhook`)
+- `culturabuilder.webhook.error` (counter, attrs: `culturabuilder.channel`,
+  `culturabuilder.webhook`)
+- `culturabuilder.webhook.duration_ms` (histogram, attrs: `culturabuilder.channel`,
+  `culturabuilder.webhook`)
+- `culturabuilder.message.queued` (counter, attrs: `culturabuilder.channel`,
+  `culturabuilder.source`)
+- `culturabuilder.message.processed` (counter, attrs: `culturabuilder.channel`,
+  `culturabuilder.outcome`)
+- `culturabuilder.message.duration_ms` (histogram, attrs: `culturabuilder.channel`,
+  `culturabuilder.outcome`)
 
 Queues + sessions:
-- `moltbot.queue.lane.enqueue` (counter, attrs: `moltbot.lane`)
-- `moltbot.queue.lane.dequeue` (counter, attrs: `moltbot.lane`)
-- `moltbot.queue.depth` (histogram, attrs: `moltbot.lane` or
-  `moltbot.channel=heartbeat`)
-- `moltbot.queue.wait_ms` (histogram, attrs: `moltbot.lane`)
-- `moltbot.session.state` (counter, attrs: `moltbot.state`, `moltbot.reason`)
-- `moltbot.session.stuck` (counter, attrs: `moltbot.state`)
-- `moltbot.session.stuck_age_ms` (histogram, attrs: `moltbot.state`)
-- `moltbot.run.attempt` (counter, attrs: `moltbot.attempt`)
+- `culturabuilder.queue.lane.enqueue` (counter, attrs: `culturabuilder.lane`)
+- `culturabuilder.queue.lane.dequeue` (counter, attrs: `culturabuilder.lane`)
+- `culturabuilder.queue.depth` (histogram, attrs: `culturabuilder.lane` or
+  `culturabuilder.channel=heartbeat`)
+- `culturabuilder.queue.wait_ms` (histogram, attrs: `culturabuilder.lane`)
+- `culturabuilder.session.state` (counter, attrs: `culturabuilder.state`, `culturabuilder.reason`)
+- `culturabuilder.session.stuck` (counter, attrs: `culturabuilder.state`)
+- `culturabuilder.session.stuck_age_ms` (histogram, attrs: `culturabuilder.state`)
+- `culturabuilder.run.attempt` (counter, attrs: `culturabuilder.attempt`)
 
 ### Exported spans (names + key attributes)
 
-- `moltbot.model.usage`
-  - `moltbot.channel`, `moltbot.provider`, `moltbot.model`
-  - `moltbot.sessionKey`, `moltbot.sessionId`
-  - `moltbot.tokens.*` (input/output/cache_read/cache_write/total)
-- `moltbot.webhook.processed`
-  - `moltbot.channel`, `moltbot.webhook`, `moltbot.chatId`
-- `moltbot.webhook.error`
-  - `moltbot.channel`, `moltbot.webhook`, `moltbot.chatId`,
-    `moltbot.error`
-- `moltbot.message.processed`
-  - `moltbot.channel`, `moltbot.outcome`, `moltbot.chatId`,
-    `moltbot.messageId`, `moltbot.sessionKey`, `moltbot.sessionId`,
-    `moltbot.reason`
-- `moltbot.session.stuck`
-  - `moltbot.state`, `moltbot.ageMs`, `moltbot.queueDepth`,
-    `moltbot.sessionKey`, `moltbot.sessionId`
+- `culturabuilder.model.usage`
+  - `culturabuilder.channel`, `culturabuilder.provider`, `culturabuilder.model`
+  - `culturabuilder.sessionKey`, `culturabuilder.sessionId`
+  - `culturabuilder.tokens.*` (input/output/cache_read/cache_write/total)
+- `culturabuilder.webhook.processed`
+  - `culturabuilder.channel`, `culturabuilder.webhook`, `culturabuilder.chatId`
+- `culturabuilder.webhook.error`
+  - `culturabuilder.channel`, `culturabuilder.webhook`, `culturabuilder.chatId`,
+    `culturabuilder.error`
+- `culturabuilder.message.processed`
+  - `culturabuilder.channel`, `culturabuilder.outcome`, `culturabuilder.chatId`,
+    `culturabuilder.messageId`, `culturabuilder.sessionKey`, `culturabuilder.sessionId`,
+    `culturabuilder.reason`
+- `culturabuilder.session.stuck`
+  - `culturabuilder.state`, `culturabuilder.ageMs`, `culturabuilder.queueDepth`,
+    `culturabuilder.sessionKey`, `culturabuilder.sessionId`
 
 ### Sampling + flushing
 
@@ -337,7 +337,7 @@ Queues + sessions:
 
 ## Troubleshooting tips
 
-- **Gateway not reachable?** Run `moltbot doctor` first.
+- **Gateway not reachable?** Run `culturabuilder doctor` first.
 - **Logs empty?** Check that the Gateway is running and writing to the file path
   in `logging.file`.
 - **Need more detail?** Set `logging.level` to `debug` or `trace` and retry.

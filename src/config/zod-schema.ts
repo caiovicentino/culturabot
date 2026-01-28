@@ -27,7 +27,7 @@ const NodeHostSchema = z
   .strict()
   .optional();
 
-export const MoltbotSchema = z
+export const CulturabuilderSchema = z
   .object({
     meta: z
       .object({

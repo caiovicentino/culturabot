@@ -14,11 +14,7 @@ const FATAL_ERROR_CODES = new Set([
   "ERR_WORKER_INITIALIZATION_FAILED",
 ]);
 
-const CONFIG_ERROR_CODES = new Set([
-  "INVALID_CONFIG",
-  "MISSING_API_KEY",
-  "MISSING_CREDENTIALS",
-]);
+const CONFIG_ERROR_CODES = new Set(["INVALID_CONFIG", "MISSING_API_KEY", "MISSING_CREDENTIALS"]);
 
 // Network error codes that indicate transient failures (shouldn't crash the gateway)
 const TRANSIENT_NETWORK_CODES = new Set([
@@ -119,7 +115,7 @@ export function isUnhandledRejectionHandled(reason: unknown): boolean {
       if (handler(reason)) return true;
     } catch (err) {
       console.error(
-        "[moltbot] Unhandled rejection handler failed:",
+        "[culturabuilder] Unhandled rejection handler failed:",
         err instanceof Error ? (err.stack ?? err.message) : err,
       );
     }
@@ -134,19 +130,19 @@ export function installUnhandledRejectionHandler(): void {
     // AbortError is typically an intentional cancellation (e.g., during shutdown)
     // Log it but don't crash - these are expected during graceful shutdown
     if (isAbortError(reason)) {
-      console.warn("[moltbot] Suppressed AbortError:", formatUncaughtError(reason));
+      console.warn("[culturabuilder] Suppressed AbortError:", formatUncaughtError(reason));
       return;
     }
 
     if (isFatalError(reason)) {
-      console.error("[moltbot] FATAL unhandled rejection:", formatUncaughtError(reason));
+      console.error("[culturabuilder] FATAL unhandled rejection:", formatUncaughtError(reason));
       process.exit(1);
       return;
     }
 
     if (isConfigError(reason)) {
       console.error(
-        "[moltbot] CONFIGURATION ERROR - requires fix:",
+        "[culturabuilder] CONFIGURATION ERROR - requires fix:",
         formatUncaughtError(reason),
       );
       process.exit(1);
@@ -155,13 +151,13 @@ export function installUnhandledRejectionHandler(): void {
 
     if (isTransientNetworkError(reason)) {
       console.warn(
-        "[moltbot] Non-fatal unhandled rejection (continuing):",
+        "[culturabuilder] Non-fatal unhandled rejection (continuing):",
         formatUncaughtError(reason),
       );
       return;
     }
 
-    console.error("[moltbot] Unhandled promise rejection:", formatUncaughtError(reason));
+    console.error("[culturabuilder] Unhandled promise rejection:", formatUncaughtError(reason));
     process.exit(1);
   });
 }

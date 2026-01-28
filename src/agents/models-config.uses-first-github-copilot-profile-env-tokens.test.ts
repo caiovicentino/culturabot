@@ -2,13 +2,13 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { withTempHome as withTempHomeBase } from "../../test/helpers/temp-home.js";
-import type { MoltbotConfig } from "../config/config.js";
+import type { CulturabuilderConfig } from "../config/config.js";
 
 async function withTempHome<T>(fn: (home: string) => Promise<T>): Promise<T> {
-  return withTempHomeBase(fn, { prefix: "moltbot-models-" });
+  return withTempHomeBase(fn, { prefix: "culturabuilder-models-" });
 }
 
-const _MODELS_CONFIG: MoltbotConfig = {
+const _MODELS_CONFIG: CulturabuilderConfig = {
   models: {
     providers: {
       "custom-proxy": {
@@ -92,9 +92,9 @@ describe("models-config", () => {
           resolveCopilotApiToken,
         }));
 
-        const { ensureMoltbotModelsJson } = await import("./models-config.js");
+        const { ensureCulturabuilderModelsJson } = await import("./models-config.js");
 
-        await ensureMoltbotModelsJson({ models: { providers: {} } }, agentDir);
+        await ensureCulturabuilderModelsJson({ models: { providers: {} } }, agentDir);
 
         expect(resolveCopilotApiToken).toHaveBeenCalledWith(
           expect.objectContaining({ githubToken: "alpha-token" }),
@@ -127,10 +127,10 @@ describe("models-config", () => {
           }),
         }));
 
-        const { ensureMoltbotModelsJson } = await import("./models-config.js");
-        const { resolveMoltbotAgentDir } = await import("./agent-paths.js");
+        const { ensureCulturabuilderModelsJson } = await import("./models-config.js");
+        const { resolveCulturabuilderAgentDir } = await import("./agent-paths.js");
 
-        await ensureMoltbotModelsJson({
+        await ensureCulturabuilderModelsJson({
           models: {
             providers: {
               "github-copilot": {
@@ -142,7 +142,7 @@ describe("models-config", () => {
           },
         });
 
-        const agentDir = resolveMoltbotAgentDir();
+        const agentDir = resolveCulturabuilderAgentDir();
         const raw = await fs.readFile(path.join(agentDir, "models.json"), "utf8");
         const parsed = JSON.parse(raw) as {
           providers: Record<string, { baseUrl?: string }>;

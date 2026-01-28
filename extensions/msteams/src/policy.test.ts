@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import type { MSTeamsConfig } from "clawdbot/plugin-sdk";
+import type { MSTeamsConfig } from "culturabuilder/plugin-sdk";
 import {
   isMSTeamsGroupAllowed,
   resolveMSTeamsReplyPolicy,

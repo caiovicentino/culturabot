@@ -13,7 +13,7 @@ android {
 
   sourceSets {
     getByName("main") {
-      assets.srcDir(file("../../shared/MoltbotKit/Sources/MoltbotKit/Resources"))
+      assets.srcDir(file("../../shared/CulturabuilderKit/Sources/CulturabuilderKit/Resources"))
     }
   }
 
@@ -65,7 +65,7 @@ androidComponents {
         val versionName = output.versionName.orNull ?: "0"
         val buildType = variant.buildType
 
-        val outputFileName = "moltbot-${versionName}-${buildType}.apk"
+        val outputFileName = "culturabuilder-${versionName}-${buildType}.apk"
         output.outputFileName = outputFileName
       }
   }

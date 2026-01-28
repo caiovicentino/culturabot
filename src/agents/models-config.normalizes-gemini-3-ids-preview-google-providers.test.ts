@@ -2,13 +2,13 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { withTempHome as withTempHomeBase } from "../../test/helpers/temp-home.js";
-import type { MoltbotConfig } from "../config/config.js";
+import type { CulturabuilderConfig } from "../config/config.js";
 
 async function withTempHome<T>(fn: (home: string) => Promise<T>): Promise<T> {
-  return withTempHomeBase(fn, { prefix: "moltbot-models-" });
+  return withTempHomeBase(fn, { prefix: "culturabuilder-models-" });
 }
 
-const _MODELS_CONFIG: MoltbotConfig = {
+const _MODELS_CONFIG: CulturabuilderConfig = {
   models: {
     providers: {
       "custom-proxy": {
@@ -46,10 +46,10 @@ describe("models-config", () => {
   it("normalizes gemini 3 ids to preview for google providers", async () => {
     await withTempHome(async () => {
       vi.resetModules();
-      const { ensureMoltbotModelsJson } = await import("./models-config.js");
-      const { resolveMoltbotAgentDir } = await import("./agent-paths.js");
+      const { ensureCulturabuilderModelsJson } = await import("./models-config.js");
+      const { resolveCulturabuilderAgentDir } = await import("./agent-paths.js");
 
-      const cfg: MoltbotConfig = {
+      const cfg: CulturabuilderConfig = {
         models: {
           providers: {
             google: {
@@ -83,9 +83,9 @@ describe("models-config", () => {
         },
       };
 
-      await ensureMoltbotModelsJson(cfg);
+      await ensureCulturabuilderModelsJson(cfg);
 
-      const modelPath = path.join(resolveMoltbotAgentDir(), "models.json");
+      const modelPath = path.join(resolveCulturabuilderAgentDir(), "models.json");
       const raw = await fs.readFile(modelPath, "utf8");
       const parsed = JSON.parse(raw) as {
         providers: Record<string, { models: Array<{ id: string }> }>;

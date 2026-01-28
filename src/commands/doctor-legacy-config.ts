@@ -1,10 +1,10 @@
-import type { MoltbotConfig } from "../config/config.js";
-export function normalizeLegacyConfigValues(cfg: MoltbotConfig): {
-  config: MoltbotConfig;
+import type { CulturabuilderConfig } from "../config/config.js";
+export function normalizeLegacyConfigValues(cfg: CulturabuilderConfig): {
+  config: CulturabuilderConfig;
   changes: string[];
 } {
   const changes: string[] = [];
-  let next: MoltbotConfig = cfg;
+  let next: CulturabuilderConfig = cfg;
 
   const legacyAckReaction = cfg.messages?.ackReaction?.trim();
   const hasWhatsAppConfig = cfg.channels?.whatsapp !== undefined;

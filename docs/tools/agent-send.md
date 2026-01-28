@@ -1,11 +1,11 @@
 ---
-summary: "Direct `moltbot agent` CLI runs (with optional delivery)"
+summary: "Direct `culturabuilder agent` CLI runs (with optional delivery)"
 read_when:
   - Adding or modifying the agent CLI entrypoint
 ---
-# `moltbot agent` (direct agent runs)
+# `culturabuilder agent` (direct agent runs)
 
-`moltbot agent` runs a single agent turn without needing an inbound chat message.
+`culturabuilder agent` runs a single agent turn without needing an inbound chat message.
 By default it goes **through the Gateway**; add `--local` to force the embedded
 runtime on the current machine.
 
@@ -21,7 +21,7 @@ runtime on the current machine.
 - Output:
   - default: prints reply text (plus `MEDIA:<url>` lines)
   - `--json`: prints structured payload + metadata
-- Optional delivery back to a channel with `--deliver` + `--channel` (target formats match `moltbot message --target`).
+- Optional delivery back to a channel with `--deliver` + `--channel` (target formats match `culturabuilder message --target`).
 - Use `--reply-channel`/`--reply-to`/`--reply-account` to override delivery without changing the session.
 
 If the Gateway is unreachable, the CLI **falls back** to the embedded local run.
@@ -29,12 +29,12 @@ If the Gateway is unreachable, the CLI **falls back** to the embedded local run.
 ## Examples
 
 ```bash
-moltbot agent --to +15555550123 --message "status update"
-moltbot agent --agent ops --message "Summarize logs"
-moltbot agent --session-id 1234 --message "Summarize inbox" --thinking medium
-moltbot agent --to +15555550123 --message "Trace logs" --verbose on --json
-moltbot agent --to +15555550123 --message "Summon reply" --deliver
-moltbot agent --agent ops --message "Generate report" --deliver --reply-channel slack --reply-to "#reports"
+culturabuilder agent --to +15555550123 --message "status update"
+culturabuilder agent --agent ops --message "Summarize logs"
+culturabuilder agent --session-id 1234 --message "Summarize inbox" --thinking medium
+culturabuilder agent --to +15555550123 --message "Trace logs" --verbose on --json
+culturabuilder agent --to +15555550123 --message "Summon reply" --deliver
+culturabuilder agent --agent ops --message "Generate report" --deliver --reply-channel slack --reply-to "#reports"
 ```
 
 ## Flags

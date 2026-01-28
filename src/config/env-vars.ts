@@ -1,6 +1,6 @@
-import type { MoltbotConfig } from "./types.js";
+import type { CulturabuilderConfig } from "./types.js";
 
-export function collectConfigEnvVars(cfg?: MoltbotConfig): Record<string, string> {
+export function collectConfigEnvVars(cfg?: CulturabuilderConfig): Record<string, string> {
   const envConfig = cfg?.env;
   if (!envConfig) return {};
 

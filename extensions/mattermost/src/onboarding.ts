@@ -1,5 +1,5 @@
-import type { ChannelOnboardingAdapter, MoltbotConfig, WizardPrompter } from "clawdbot/plugin-sdk";
-import { DEFAULT_ACCOUNT_ID, normalizeAccountId } from "clawdbot/plugin-sdk";
+import type { ChannelOnboardingAdapter, CulturabuilderConfig, WizardPrompter } from "culturabuilder/plugin-sdk";
+import { DEFAULT_ACCOUNT_ID, normalizeAccountId } from "culturabuilder/plugin-sdk";
 
 import {
   listMattermostAccountIds,
@@ -17,7 +17,7 @@ async function noteMattermostSetup(prompter: WizardPrompter): Promise<void> {
       "2) Create a bot + copy its token",
       "3) Use your server base URL (e.g., https://chat.example.com)",
       "Tip: the bot must be a member of any channel you want it to monitor.",
-      "Docs: https://docs.molt.bot/channels/mattermost",
+      "Docs: https://docs.culturabuilder.com/channels/mattermost",
     ].join("\n"),
     "Mattermost bot token",
   );
@@ -177,7 +177,7 @@ export const mattermostOnboardingAdapter: ChannelOnboardingAdapter = {
 
     return { cfg: next, accountId };
   },
-  disable: (cfg: MoltbotConfig) => ({
+  disable: (cfg: CulturabuilderConfig) => ({
     ...cfg,
     channels: {
       ...cfg.channels,

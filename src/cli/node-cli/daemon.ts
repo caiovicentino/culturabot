@@ -47,7 +47,10 @@ type NodeDaemonStatusOptions = {
 };
 
 function renderNodeServiceStartHints(): string[] {
-  const base = [formatCliCommand("moltbot node install"), formatCliCommand("moltbot node start")];
+  const base = [
+    formatCliCommand("culturabuilder node install"),
+    formatCliCommand("culturabuilder node start"),
+  ];
   switch (process.platform) {
     case "darwin":
       return [
@@ -169,7 +172,9 @@ export async function runNodeDaemonInstall(opts: NodeDaemonInstallOptions) {
     });
     if (!json) {
       defaultRuntime.log(`Node service already ${service.loadedText}.`);
-      defaultRuntime.log(`Reinstall with: ${formatCliCommand("moltbot node install --force")}`);
+      defaultRuntime.log(
+        `Reinstall with: ${formatCliCommand("culturabuilder node install --force")}`,
+      );
     }
     return;
   }
@@ -561,7 +566,7 @@ export async function runNodeDaemonStatus(opts: NodeDaemonStatusOptions = {}) {
   };
   const hintEnv = {
     ...baseEnv,
-    CLAWDBOT_LOG_PREFIX: baseEnv.CLAWDBOT_LOG_PREFIX ?? "node",
+    CULTURABUILDER_LOG_PREFIX: baseEnv.CULTURABUILDER_LOG_PREFIX ?? "node",
   } as NodeJS.ProcessEnv;
 
   if (runtime?.missingUnit) {

@@ -1,23 +1,23 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "name": "Moltbot",
+  "name": "Culturabuilder",
   "theme": "mint",
   "logo": {
-    "light": "/assets/pixel-lobster.svg",
-    "dark": "/assets/pixel-lobster.svg"
+    "light": "/assets/logo-culturabuilder-light.svg",
+    "dark": "/assets/logo-culturabuilder.svg"
   },
-  "favicon": "/assets/pixel-lobster.svg",
+  "favicon": "/assets/favicon-culturabuilder.svg",
   "colors": {
     "primary": "#FF5A36"
   },
   "topbarLinks": [
     {
       "name": "GitHub",
-      "url": "https://github.com/moltbot/moltbot"
+      "url": "https://github.com/culturabuilder/culturabuilder"
     },
     {
       "name": "Releases",
-      "url": "https://github.com/moltbot/moltbot/releases"
+      "url": "https://github.com/culturabuilder/culturabuilder/releases"
     }
   ],
   "redirects": [
@@ -351,11 +351,11 @@
     },
     {
       "source": "/clawd",
-      "destination": "/start/clawd"
+      "destination": "/start/culturabuilder"
     },
     {
       "source": "/clawdhub",
-      "destination": "/tools/clawdhub"
+      "destination": "/tools/culturabuilder-hub"
     },
     {
       "source": "/configuration",
@@ -824,7 +824,7 @@
           "start/wizard",
           "start/setup",
           "start/pairing",
-          "start/clawd",
+          "start/culturabuilder",
           "start/showcase",
           "start/hubs",
           "start/onboarding",
@@ -1057,7 +1057,7 @@
           "tools/reactions",
           "tools/skills",
           "tools/skills-config",
-          "tools/clawdhub"
+          "tools/culturabuilder-hub"
         ]
       },
       {

@@ -1,18 +1,18 @@
-import type { MoltbotConfig } from "../config/config.js";
+import type { CulturabuilderConfig } from "../config/config.js";
 
 const DEFAULT_AGENT_TIMEOUT_SECONDS = 600;
 
 const normalizeNumber = (value: unknown): number | undefined =>
   typeof value === "number" && Number.isFinite(value) ? Math.floor(value) : undefined;
 
-export function resolveAgentTimeoutSeconds(cfg?: MoltbotConfig): number {
+export function resolveAgentTimeoutSeconds(cfg?: CulturabuilderConfig): number {
   const raw = normalizeNumber(cfg?.agents?.defaults?.timeoutSeconds);
   const seconds = raw ?? DEFAULT_AGENT_TIMEOUT_SECONDS;
   return Math.max(seconds, 1);
 }
 
 export function resolveAgentTimeoutMs(opts: {
-  cfg?: MoltbotConfig;
+  cfg?: CulturabuilderConfig;
   overrideMs?: number | null;
   overrideSeconds?: number | null;
   minMs?: number;

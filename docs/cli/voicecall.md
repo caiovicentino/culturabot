@@ -1,11 +1,11 @@
 ---
-summary: "CLI reference for `moltbot voicecall` (voice-call plugin command surface)"
+summary: "CLI reference for `culturabuilder voicecall` (voice-call plugin command surface)"
 read_when:
   - You use the voice-call plugin and want the CLI entry points
   - You want quick examples for `voicecall call|continue|status|tail|expose`
 ---
 
-# `moltbot voicecall`
+# `culturabuilder voicecall`
 
 `voicecall` is a plugin-provided command. It only appears if the voice-call plugin is installed and enabled.
 
@@ -15,18 +15,18 @@ Primary doc:
 ## Common commands
 
 ```bash
-moltbot voicecall status --call-id <id>
-moltbot voicecall call --to "+15555550123" --message "Hello" --mode notify
-moltbot voicecall continue --call-id <id> --message "Any questions?"
-moltbot voicecall end --call-id <id>
+culturabuilder voicecall status --call-id <id>
+culturabuilder voicecall call --to "+15555550123" --message "Hello" --mode notify
+culturabuilder voicecall continue --call-id <id> --message "Any questions?"
+culturabuilder voicecall end --call-id <id>
 ```
 
 ## Exposing webhooks (Tailscale)
 
 ```bash
-moltbot voicecall expose --mode serve
-moltbot voicecall expose --mode funnel
-moltbot voicecall unexpose
+culturabuilder voicecall expose --mode serve
+culturabuilder voicecall expose --mode funnel
+culturabuilder voicecall unexpose
 ```
 
 Security note: only expose the webhook endpoint to networks you trust. Prefer Tailscale Serve over Funnel when possible.

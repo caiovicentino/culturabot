@@ -1,17 +1,17 @@
-# @clawdbot/zalo
+# @culturabuilder/zalo
 
-Zalo channel plugin for Clawdbot (Bot API).
+Zalo channel plugin for Culturabuilder (Bot API).
 
 ## Install (local checkout)
 
 ```bash
-clawdbot plugins install ./extensions/zalo
+culturabuilder plugins install ./extensions/zalo
 ```
 
 ## Install (npm)
 
 ```bash
-clawdbot plugins install @clawdbot/zalo
+culturabuilder plugins install @culturabuilder/zalo
 ```
 
 Onboarding: select Zalo and confirm the install prompt to fetch the plugin automatically.

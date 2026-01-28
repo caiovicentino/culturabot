@@ -1,9 +1,9 @@
 {
-  "name": "@moltbot/nostr",
+  "name": "@culturabuilder/nostr",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot Nostr channel plugin for NIP-04 encrypted DMs",
-  "moltbot": {
+  "description": "Culturabuilder Nostr channel plugin for NIP-04 encrypted DMs",
+  "culturabuilder": {
     "extensions": [
       "./index.ts"
     ],
@@ -18,13 +18,13 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "@moltbot/nostr",
+      "npmSpec": "@culturabuilder/nostr",
       "localPath": "extensions/nostr",
       "defaultChoice": "npm"
     }
   },
   "dependencies": {
-    "moltbot": "workspace:*",
+    "culturabuilder": "workspace:*",
     "nostr-tools": "^2.20.0",
     "zod": "^4.3.6"
   }

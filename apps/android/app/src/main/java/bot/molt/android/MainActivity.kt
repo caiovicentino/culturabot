@@ -19,7 +19,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import bot.molt.android.ui.RootScreen
-import bot.molt.android.ui.MoltbotTheme
+import bot.molt.android.ui.CulturabuilderTheme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -56,7 +56,7 @@ class MainActivity : ComponentActivity() {
     }
 
     setContent {
-      MoltbotTheme {
+      CulturabuilderTheme {
         Surface(modifier = Modifier) {
           RootScreen(viewModel = viewModel)
         }

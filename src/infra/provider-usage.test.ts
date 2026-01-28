@@ -253,7 +253,7 @@ describe("provider usage loading", () => {
     await withTempHome(
       async (tempHome) => {
         const agentDir = path.join(
-          process.env.CLAWDBOT_STATE_DIR ?? path.join(tempHome, ".clawdbot"),
+          process.env.CULTURABUILDER_STATE_DIR ?? path.join(tempHome, ".culturabuilder"),
           "agents",
           "main",
           "agent",
@@ -328,9 +328,9 @@ describe("provider usage loading", () => {
       },
       {
         env: {
-          CLAWDBOT_STATE_DIR: (home) => path.join(home, ".clawdbot"),
+          CULTURABUILDER_STATE_DIR: (home) => path.join(home, ".culturabuilder"),
         },
-        prefix: "moltbot-provider-usage-",
+        prefix: "culturabuilder-provider-usage-",
       },
     );
   });

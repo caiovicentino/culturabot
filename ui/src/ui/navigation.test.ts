@@ -73,7 +73,7 @@ describe("subtitleForTab", () => {
 
   it("returns descriptive subtitles", () => {
     expect(subtitleForTab("chat")).toContain("chat session");
-    expect(subtitleForTab("config")).toContain("moltbot.json");
+    expect(subtitleForTab("config")).toContain("culturabuilder.json");
   });
 });
 
@@ -95,7 +95,7 @@ describe("normalizeBasePath", () => {
   });
 
   it("handles nested paths", () => {
-    expect(normalizeBasePath("/apps/moltbot")).toBe("/apps/moltbot");
+    expect(normalizeBasePath("/apps/culturabuilder")).toBe("/apps/culturabuilder");
   });
 });
 
@@ -122,7 +122,7 @@ describe("pathForTab", () => {
 
   it("prepends base path", () => {
     expect(pathForTab("chat", "/ui")).toBe("/ui/chat");
-    expect(pathForTab("sessions", "/apps/moltbot")).toBe("/apps/moltbot/sessions");
+    expect(pathForTab("sessions", "/apps/culturabuilder")).toBe("/apps/culturabuilder/sessions");
   });
 });
 
@@ -139,7 +139,7 @@ describe("tabFromPath", () => {
 
   it("handles base paths", () => {
     expect(tabFromPath("/ui/chat", "/ui")).toBe("chat");
-    expect(tabFromPath("/apps/moltbot/sessions", "/apps/moltbot")).toBe("sessions");
+    expect(tabFromPath("/apps/culturabuilder/sessions", "/apps/culturabuilder")).toBe("sessions");
   });
 
   it("returns null for unknown path", () => {
@@ -164,7 +164,7 @@ describe("inferBasePathFromPathname", () => {
 
   it("infers base path from nested paths", () => {
     expect(inferBasePathFromPathname("/ui/chat")).toBe("/ui");
-    expect(inferBasePathFromPathname("/apps/moltbot/sessions")).toBe("/apps/moltbot");
+    expect(inferBasePathFromPathname("/apps/culturabuilder/sessions")).toBe("/apps/culturabuilder");
   });
 
   it("handles index.html suffix", () => {

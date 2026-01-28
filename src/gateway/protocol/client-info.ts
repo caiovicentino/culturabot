@@ -1,16 +1,16 @@
 export const GATEWAY_CLIENT_IDS = {
   WEBCHAT_UI: "webchat-ui",
-  CONTROL_UI: "moltbot-control-ui",
+  CONTROL_UI: "culturabuilder-control-ui",
   WEBCHAT: "webchat",
   CLI: "cli",
   GATEWAY_CLIENT: "gateway-client",
-  MACOS_APP: "moltbot-macos",
-  IOS_APP: "moltbot-ios",
-  ANDROID_APP: "moltbot-android",
+  MACOS_APP: "culturabuilder-macos",
+  IOS_APP: "culturabuilder-ios",
+  ANDROID_APP: "culturabuilder-android",
   NODE_HOST: "node-host",
   TEST: "test",
   FINGERPRINT: "fingerprint",
-  PROBE: "moltbot-probe",
+  PROBE: "culturabuilder-probe",
 } as const;
 
 export type GatewayClientId = (typeof GATEWAY_CLIENT_IDS)[keyof typeof GATEWAY_CLIENT_IDS];

@@ -1,4 +1,4 @@
-import MoltbotKit
+import CulturabuilderKit
 import CoreLocation
 import Foundation
 
@@ -30,7 +30,7 @@ final class LocationService: NSObject, CLLocationManagerDelegate {
         return .fullAccuracy
     }
 
-    func ensureAuthorization(mode: MoltbotLocationMode) async -> CLAuthorizationStatus {
+    func ensureAuthorization(mode: CulturabuilderLocationMode) async -> CLAuthorizationStatus {
         guard CLLocationManager.locationServicesEnabled() else { return .denied }
 
         let status = self.manager.authorizationStatus
@@ -53,8 +53,8 @@ final class LocationService: NSObject, CLLocationManagerDelegate {
     }
 
     func currentLocation(
-        params: MoltbotLocationGetParams,
-        desiredAccuracy: MoltbotLocationAccuracy,
+        params: CulturabuilderLocationGetParams,
+        desiredAccuracy: CulturabuilderLocationAccuracy,
         maxAgeMs: Int?,
         timeoutMs: Int?) async throws -> CLLocation
     {
@@ -93,7 +93,7 @@ final class LocationService: NSObject, CLLocationManagerDelegate {
         try await AsyncTimeout.withTimeoutMs(timeoutMs: timeoutMs, onTimeout: { Error.timeout }, operation: operation)
     }
 
-    private static func accuracyValue(_ accuracy: MoltbotLocationAccuracy) -> CLLocationAccuracy {
+    private static func accuracyValue(_ accuracy: CulturabuilderLocationAccuracy) -> CLLocationAccuracy {
         switch accuracy {
         case .coarse:
             kCLLocationAccuracyKilometer

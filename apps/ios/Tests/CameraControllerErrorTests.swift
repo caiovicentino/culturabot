@@ -1,5 +1,5 @@
 import Testing
-@testable import Moltbot
+@testable import Culturabuilder
 
 @Suite struct CameraControllerErrorTests {
     @Test func errorDescriptionsAreStable() {

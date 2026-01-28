@@ -95,8 +95,8 @@ vi.mock("@opentelemetry/semantic-conventions", () => ({
   },
 }));
 
-vi.mock("clawdbot/plugin-sdk", async () => {
-  const actual = await vi.importActual<typeof import("clawdbot/plugin-sdk")>("clawdbot/plugin-sdk");
+vi.mock("culturabuilder/plugin-sdk", async () => {
+  const actual = await vi.importActual<typeof import("culturabuilder/plugin-sdk")>("culturabuilder/plugin-sdk");
   return {
     ...actual,
     registerLogTransport: registerLogTransportMock,
@@ -104,7 +104,7 @@ vi.mock("clawdbot/plugin-sdk", async () => {
 });
 
 import { createDiagnosticsOtelService } from "./service.js";
-import { emitDiagnosticEvent } from "clawdbot/plugin-sdk";
+import { emitDiagnosticEvent } from "culturabuilder/plugin-sdk";
 
 describe("diagnostics-otel service", () => {
   beforeEach(() => {
@@ -191,20 +191,20 @@ describe("diagnostics-otel service", () => {
       attempt: 2,
     });
 
-    expect(telemetryState.counters.get("moltbot.webhook.received")?.add).toHaveBeenCalled();
-    expect(telemetryState.histograms.get("moltbot.webhook.duration_ms")?.record).toHaveBeenCalled();
-    expect(telemetryState.counters.get("moltbot.message.queued")?.add).toHaveBeenCalled();
-    expect(telemetryState.counters.get("moltbot.message.processed")?.add).toHaveBeenCalled();
-    expect(telemetryState.histograms.get("moltbot.message.duration_ms")?.record).toHaveBeenCalled();
-    expect(telemetryState.histograms.get("moltbot.queue.wait_ms")?.record).toHaveBeenCalled();
-    expect(telemetryState.counters.get("moltbot.session.stuck")?.add).toHaveBeenCalled();
-    expect(telemetryState.histograms.get("moltbot.session.stuck_age_ms")?.record).toHaveBeenCalled();
-    expect(telemetryState.counters.get("moltbot.run.attempt")?.add).toHaveBeenCalled();
+    expect(telemetryState.counters.get("culturabuilder.webhook.received")?.add).toHaveBeenCalled();
+    expect(telemetryState.histograms.get("culturabuilder.webhook.duration_ms")?.record).toHaveBeenCalled();
+    expect(telemetryState.counters.get("culturabuilder.message.queued")?.add).toHaveBeenCalled();
+    expect(telemetryState.counters.get("culturabuilder.message.processed")?.add).toHaveBeenCalled();
+    expect(telemetryState.histograms.get("culturabuilder.message.duration_ms")?.record).toHaveBeenCalled();
+    expect(telemetryState.histograms.get("culturabuilder.queue.wait_ms")?.record).toHaveBeenCalled();
+    expect(telemetryState.counters.get("culturabuilder.session.stuck")?.add).toHaveBeenCalled();
+    expect(telemetryState.histograms.get("culturabuilder.session.stuck_age_ms")?.record).toHaveBeenCalled();
+    expect(telemetryState.counters.get("culturabuilder.run.attempt")?.add).toHaveBeenCalled();
 
     const spanNames = telemetryState.tracer.startSpan.mock.calls.map((call) => call[0]);
-    expect(spanNames).toContain("moltbot.webhook.processed");
-    expect(spanNames).toContain("moltbot.message.processed");
-    expect(spanNames).toContain("moltbot.session.stuck");
+    expect(spanNames).toContain("culturabuilder.webhook.processed");
+    expect(spanNames).toContain("culturabuilder.message.processed");
+    expect(spanNames).toContain("culturabuilder.session.stuck");
 
     expect(registerLogTransportMock).toHaveBeenCalledTimes(1);
     expect(registeredTransports).toHaveLength(1);

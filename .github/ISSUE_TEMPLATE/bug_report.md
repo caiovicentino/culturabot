@@ -1,28 +1,28 @@
 ---
-name: Bug report
-about: Report a problem or unexpected behavior in Clawdbot.
+name: Relatorio de bug
+about: Reporte um problema ou comportamento inesperado no CulturaBuilder.
 title: "[Bug]: "
 labels: bug
 ---
 
-## Summary
-What went wrong?
+## Resumo
+O que deu errado?
 
-## Steps to reproduce
+## Passos para reproduzir
 1.
 2.
 3.
 
-## Expected behavior
-What did you expect to happen?
+## Comportamento esperado
+O que voce esperava que acontecesse?
 
-## Actual behavior
-What actually happened?
+## Comportamento atual
+O que realmente aconteceu?
 
-## Environment
-- Clawdbot version:
+## Ambiente
+- Versao CulturaBuilder:
 - OS:
-- Install method (pnpm/npx/docker/etc):
+- Metodo de instalacao (pnpm/npx/docker/etc):
 
-## Logs or screenshots
-Paste relevant logs or add screenshots (redact secrets).
+## Logs ou screenshots
+Cole logs relevantes ou adicione screenshots (oculte segredos).

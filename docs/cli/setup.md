@@ -1,13 +1,13 @@
 ---
-summary: "CLI reference for `moltbot setup` (initialize config + workspace)"
+summary: "CLI reference for `culturabuilder setup` (initialize config + workspace)"
 read_when:
   - You’re doing first-run setup without the full onboarding wizard
   - You want to set the default workspace path
 ---
 
-# `moltbot setup`
+# `culturabuilder setup`
 
-Initialize `~/.clawdbot/moltbot.json` and the agent workspace.
+Initialize `~/.culturabuilder/culturabuilder.json` and the agent workspace.
 
 Related:
 - Getting started: [Getting started](/start/getting-started)
@@ -16,13 +16,13 @@ Related:
 ## Examples
 
 ```bash
-moltbot setup
-moltbot setup --workspace ~/clawd
+culturabuilder setup
+culturabuilder setup --workspace ~/clawd
 ```
 
 To run the wizard via setup:
 
 ```bash
-moltbot setup --wizard
+culturabuilder setup --wizard
 ```
 

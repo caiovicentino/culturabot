@@ -26,14 +26,14 @@ import bot.molt.android.BuildConfig
 import bot.molt.android.node.CanvasController
 import bot.molt.android.node.ScreenRecordManager
 import bot.molt.android.node.SmsManager
-import bot.molt.android.protocol.MoltbotCapability
-import bot.molt.android.protocol.MoltbotCameraCommand
-import bot.molt.android.protocol.MoltbotCanvasA2UIAction
-import bot.molt.android.protocol.MoltbotCanvasA2UICommand
-import bot.molt.android.protocol.MoltbotCanvasCommand
-import bot.molt.android.protocol.MoltbotScreenCommand
-import bot.molt.android.protocol.MoltbotLocationCommand
-import bot.molt.android.protocol.MoltbotSmsCommand
+import bot.molt.android.protocol.CulturabuilderCapability
+import bot.molt.android.protocol.CulturabuilderCameraCommand
+import bot.molt.android.protocol.CulturabuilderCanvasA2UIAction
+import bot.molt.android.protocol.CulturabuilderCanvasA2UICommand
+import bot.molt.android.protocol.CulturabuilderCanvasCommand
+import bot.molt.android.protocol.CulturabuilderScreenCommand
+import bot.molt.android.protocol.CulturabuilderLocationCommand
+import bot.molt.android.protocol.CulturabuilderSmsCommand
 import bot.molt.android.voice.TalkModeManager
 import bot.molt.android.voice.VoiceWakeManager
 import kotlinx.coroutines.CoroutineScope
@@ -451,38 +451,38 @@ class NodeRuntime(context: Context) {
 
   private fun buildInvokeCommands(): List<String> =
     buildList {
-      add(MoltbotCanvasCommand.Present.rawValue)
-      add(MoltbotCanvasCommand.Hide.rawValue)
-      add(MoltbotCanvasCommand.Navigate.rawValue)
-      add(MoltbotCanvasCommand.Eval.rawValue)
-      add(MoltbotCanvasCommand.Snapshot.rawValue)
-      add(MoltbotCanvasA2UICommand.Push.rawValue)
-      add(MoltbotCanvasA2UICommand.PushJSONL.rawValue)
-      add(MoltbotCanvasA2UICommand.Reset.rawValue)
-      add(MoltbotScreenCommand.Record.rawValue)
+      add(CulturabuilderCanvasCommand.Present.rawValue)
+      add(CulturabuilderCanvasCommand.Hide.rawValue)
+      add(CulturabuilderCanvasCommand.Navigate.rawValue)
+      add(CulturabuilderCanvasCommand.Eval.rawValue)
+      add(CulturabuilderCanvasCommand.Snapshot.rawValue)
+      add(CulturabuilderCanvasA2UICommand.Push.rawValue)
+      add(CulturabuilderCanvasA2UICommand.PushJSONL.rawValue)
+      add(CulturabuilderCanvasA2UICommand.Reset.rawValue)
+      add(CulturabuilderScreenCommand.Record.rawValue)
       if (cameraEnabled.value) {
-        add(MoltbotCameraCommand.Snap.rawValue)
-        add(MoltbotCameraCommand.Clip.rawValue)
+        add(CulturabuilderCameraCommand.Snap.rawValue)
+        add(CulturabuilderCameraCommand.Clip.rawValue)
       }
       if (locationMode.value != LocationMode.Off) {
-        add(MoltbotLocationCommand.Get.rawValue)
+        add(CulturabuilderLocationCommand.Get.rawValue)
       }
       if (sms.canSendSms()) {
-        add(MoltbotSmsCommand.Send.rawValue)
+        add(CulturabuilderSmsCommand.Send.rawValue)
       }
     }
 
   private fun buildCapabilities(): List<String> =
     buildList {
-      add(MoltbotCapability.Canvas.rawValue)
-      add(MoltbotCapability.Screen.rawValue)
-      if (cameraEnabled.value) add(MoltbotCapability.Camera.rawValue)
-      if (sms.canSendSms()) add(MoltbotCapability.Sms.rawValue)
+      add(CulturabuilderCapability.Canvas.rawValue)
+      add(CulturabuilderCapability.Screen.rawValue)
+      if (cameraEnabled.value) add(CulturabuilderCapability.Camera.rawValue)
+      if (sms.canSendSms()) add(CulturabuilderCapability.Sms.rawValue)
       if (voiceWakeMode.value != VoiceWakeMode.Off && hasRecordAudioPermission()) {
-        add(MoltbotCapability.VoiceWake.rawValue)
+        add(CulturabuilderCapability.VoiceWake.rawValue)
       }
       if (locationMode.value != LocationMode.Off) {
-        add(MoltbotCapability.Location.rawValue)
+        add(CulturabuilderCapability.Location.rawValue)
       }
     }
 
@@ -506,7 +506,7 @@ class NodeRuntime(context: Context) {
     val version = resolvedVersionName()
     val release = Build.VERSION.RELEASE?.trim().orEmpty()
     val releaseLabel = if (release.isEmpty()) "unknown" else release
-    return "MoltbotAndroid/$version (Android $releaseLabel; SDK ${Build.VERSION.SDK_INT})"
+    return "CulturabuilderAndroid/$version (Android $releaseLabel; SDK ${Build.VERSION.SDK_INT})"
   }
 
   private fun buildClientInfo(clientId: String, clientMode: String): GatewayClientInfo {
@@ -529,7 +529,7 @@ class NodeRuntime(context: Context) {
       caps = buildCapabilities(),
       commands = buildInvokeCommands(),
       permissions = emptyMap(),
-      client = buildClientInfo(clientId = "moltbot-android", clientMode = "node"),
+      client = buildClientInfo(clientId = "culturabuilder-android", clientMode = "node"),
       userAgent = buildUserAgent(),
     )
   }
@@ -541,7 +541,7 @@ class NodeRuntime(context: Context) {
       caps = emptyList(),
       commands = emptyList(),
       permissions = emptyMap(),
-      client = buildClientInfo(clientId = "moltbot-control-ui", clientMode = "ui"),
+      client = buildClientInfo(clientId = "culturabuilder-control-ui", clientMode = "ui"),
       userAgent = buildUserAgent(),
     )
   }
@@ -665,7 +665,7 @@ class NodeRuntime(context: Context) {
       val actionId = (userActionObj["id"] as? JsonPrimitive)?.content?.trim().orEmpty().ifEmpty {
         java.util.UUID.randomUUID().toString()
       }
-      val name = MoltbotCanvasA2UIAction.extractActionName(userActionObj) ?: return@launch
+      val name = CulturabuilderCanvasA2UIAction.extractActionName(userActionObj) ?: return@launch
 
       val surfaceId =
         (userActionObj["surfaceId"] as? JsonPrimitive)?.content?.trim().orEmpty().ifEmpty { "main" }
@@ -675,7 +675,7 @@ class NodeRuntime(context: Context) {
 
       val sessionKey = resolveMainSessionKey()
       val message =
-        MoltbotCanvasA2UIAction.formatAgentMessage(
+        CulturabuilderCanvasA2UIAction.formatAgentMessage(
           actionName = name,
           sessionKey = sessionKey,
           surfaceId = surfaceId,
@@ -709,7 +709,7 @@ class NodeRuntime(context: Context) {
 
       try {
         canvas.eval(
-          MoltbotCanvasA2UIAction.jsDispatchA2UIActionStatus(
+          CulturabuilderCanvasA2UIAction.jsDispatchA2UIActionStatus(
             actionId = actionId,
             ok = connected && error == null,
             error = error,
@@ -827,10 +827,10 @@ class NodeRuntime(context: Context) {
 
   private suspend fun handleInvoke(command: String, paramsJson: String?): GatewaySession.InvokeResult {
     if (
-      command.startsWith(MoltbotCanvasCommand.NamespacePrefix) ||
-        command.startsWith(MoltbotCanvasA2UICommand.NamespacePrefix) ||
-        command.startsWith(MoltbotCameraCommand.NamespacePrefix) ||
-        command.startsWith(MoltbotScreenCommand.NamespacePrefix)
+      command.startsWith(CulturabuilderCanvasCommand.NamespacePrefix) ||
+        command.startsWith(CulturabuilderCanvasA2UICommand.NamespacePrefix) ||
+        command.startsWith(CulturabuilderCameraCommand.NamespacePrefix) ||
+        command.startsWith(CulturabuilderScreenCommand.NamespacePrefix)
       ) {
       if (!isForeground.value) {
         return GatewaySession.InvokeResult.error(
@@ -839,13 +839,13 @@ class NodeRuntime(context: Context) {
         )
       }
     }
-    if (command.startsWith(MoltbotCameraCommand.NamespacePrefix) && !cameraEnabled.value) {
+    if (command.startsWith(CulturabuilderCameraCommand.NamespacePrefix) && !cameraEnabled.value) {
       return GatewaySession.InvokeResult.error(
         code = "CAMERA_DISABLED",
         message = "CAMERA_DISABLED: enable Camera in Settings",
       )
     }
-    if (command.startsWith(MoltbotLocationCommand.NamespacePrefix) &&
+    if (command.startsWith(CulturabuilderLocationCommand.NamespacePrefix) &&
       locationMode.value == LocationMode.Off
     ) {
       return GatewaySession.InvokeResult.error(
@@ -855,18 +855,18 @@ class NodeRuntime(context: Context) {
     }
 
     return when (command) {
-      MoltbotCanvasCommand.Present.rawValue -> {
+      CulturabuilderCanvasCommand.Present.rawValue -> {
         val url = CanvasController.parseNavigateUrl(paramsJson)
         canvas.navigate(url)
         GatewaySession.InvokeResult.ok(null)
       }
-      MoltbotCanvasCommand.Hide.rawValue -> GatewaySession.InvokeResult.ok(null)
-      MoltbotCanvasCommand.Navigate.rawValue -> {
+      CulturabuilderCanvasCommand.Hide.rawValue -> GatewaySession.InvokeResult.ok(null)
+      CulturabuilderCanvasCommand.Navigate.rawValue -> {
         val url = CanvasController.parseNavigateUrl(paramsJson)
         canvas.navigate(url)
         GatewaySession.InvokeResult.ok(null)
       }
-      MoltbotCanvasCommand.Eval.rawValue -> {
+      CulturabuilderCanvasCommand.Eval.rawValue -> {
         val js =
           CanvasController.parseEvalJs(paramsJson)
             ?: return GatewaySession.InvokeResult.error(
@@ -884,7 +884,7 @@ class NodeRuntime(context: Context) {
           }
         GatewaySession.InvokeResult.ok("""{"result":${result.toJsonString()}}""")
       }
-      MoltbotCanvasCommand.Snapshot.rawValue -> {
+      CulturabuilderCanvasCommand.Snapshot.rawValue -> {
         val snapshotParams = CanvasController.parseSnapshotParams(paramsJson)
         val base64 =
           try {
@@ -901,7 +901,7 @@ class NodeRuntime(context: Context) {
           }
         GatewaySession.InvokeResult.ok("""{"format":"${snapshotParams.format.rawValue}","base64":"$base64"}""")
       }
-      MoltbotCanvasA2UICommand.Reset.rawValue -> {
+      CulturabuilderCanvasA2UICommand.Reset.rawValue -> {
         val a2uiUrl = resolveA2uiHostUrl()
           ?: return GatewaySession.InvokeResult.error(
             code = "A2UI_HOST_NOT_CONFIGURED",
@@ -917,7 +917,7 @@ class NodeRuntime(context: Context) {
         val res = canvas.eval(a2uiResetJS)
         GatewaySession.InvokeResult.ok(res)
       }
-      MoltbotCanvasA2UICommand.Push.rawValue, MoltbotCanvasA2UICommand.PushJSONL.rawValue -> {
+      CulturabuilderCanvasA2UICommand.Push.rawValue, CulturabuilderCanvasA2UICommand.PushJSONL.rawValue -> {
         val messages =
           try {
             decodeA2uiMessages(command, paramsJson)
@@ -940,7 +940,7 @@ class NodeRuntime(context: Context) {
         val res = canvas.eval(js)
         GatewaySession.InvokeResult.ok(res)
       }
-      MoltbotCameraCommand.Snap.rawValue -> {
+      CulturabuilderCameraCommand.Snap.rawValue -> {
         showCameraHud(message = "Taking photo…", kind = CameraHudKind.Photo)
         triggerCameraFlash()
         val res =
@@ -954,7 +954,7 @@ class NodeRuntime(context: Context) {
         showCameraHud(message = "Photo captured", kind = CameraHudKind.Success, autoHideMs = 1600)
         GatewaySession.InvokeResult.ok(res.payloadJson)
       }
-      MoltbotCameraCommand.Clip.rawValue -> {
+      CulturabuilderCameraCommand.Clip.rawValue -> {
         val includeAudio = paramsJson?.contains("\"includeAudio\":true") != false
         if (includeAudio) externalAudioCaptureActive.value = true
         try {
@@ -973,7 +973,7 @@ class NodeRuntime(context: Context) {
           if (includeAudio) externalAudioCaptureActive.value = false
         }
       }
-      MoltbotLocationCommand.Get.rawValue -> {
+      CulturabuilderLocationCommand.Get.rawValue -> {
         val mode = locationMode.value
         if (!isForeground.value && mode != LocationMode.Always) {
           return GatewaySession.InvokeResult.error(
@@ -1026,7 +1026,7 @@ class NodeRuntime(context: Context) {
           GatewaySession.InvokeResult.error(code = "LOCATION_UNAVAILABLE", message = message)
         }
       }
-      MoltbotScreenCommand.Record.rawValue -> {
+      CulturabuilderScreenCommand.Record.rawValue -> {
         // Status pill mirrors screen recording state so it stays visible without overlay stacking.
         _screenRecordActive.value = true
         try {
@@ -1042,7 +1042,7 @@ class NodeRuntime(context: Context) {
           _screenRecordActive.value = false
         }
       }
-      MoltbotSmsCommand.Send.rawValue -> {
+      CulturabuilderSmsCommand.Send.rawValue -> {
         val res = sms.send(paramsJson)
         if (res.ok) {
           GatewaySession.InvokeResult.ok(res.payloadJson)
@@ -1115,7 +1115,7 @@ class NodeRuntime(context: Context) {
     val raw = if (nodeRaw.isNotBlank()) nodeRaw else operatorRaw
     if (raw.isBlank()) return null
     val base = raw.trimEnd('/')
-    return "${base}/__moltbot__/a2ui/?platform=android"
+    return "${base}/__culturabuilder__/a2ui/?platform=android"
   }
 
   private suspend fun ensureA2uiReady(a2uiUrl: String): Boolean {
@@ -1150,7 +1150,7 @@ class NodeRuntime(context: Context) {
     val jsonlField = (obj["jsonl"] as? JsonPrimitive)?.content?.trim().orEmpty()
     val hasMessagesArray = obj["messages"] is JsonArray
 
-    if (command == MoltbotCanvasA2UICommand.PushJSONL.rawValue || (!hasMessagesArray && jsonlField.isNotBlank())) {
+    if (command == CulturabuilderCanvasA2UICommand.PushJSONL.rawValue || (!hasMessagesArray && jsonlField.isNotBlank())) {
       val jsonl = jsonlField
       if (jsonl.isBlank()) throw IllegalArgumentException("INVALID_REQUEST: jsonl required")
       val messages =
@@ -1207,7 +1207,7 @@ private const val a2uiReadyCheckJS: String =
   """
   (() => {
     try {
-      return !!globalThis.clawdbotA2UI && typeof globalThis.clawdbotA2UI.applyMessages === 'function';
+      return !!globalThis.culturabuilderA2UI && typeof globalThis.culturabuilderA2UI.applyMessages === 'function';
     } catch (_) {
       return false;
     }
@@ -1218,8 +1218,8 @@ private const val a2uiResetJS: String =
   """
   (() => {
     try {
-      if (!globalThis.clawdbotA2UI) return { ok: false, error: "missing moltbotA2UI" };
-      return globalThis.clawdbotA2UI.reset();
+      if (!globalThis.culturabuilderA2UI) return { ok: false, error: "missing culturabuilderA2UI" };
+      return globalThis.culturabuilderA2UI.reset();
     } catch (e) {
       return { ok: false, error: String(e?.message ?? e) };
     }
@@ -1230,9 +1230,9 @@ private fun a2uiApplyMessagesJS(messagesJson: String): String {
   return """
     (() => {
       try {
-        if (!globalThis.clawdbotA2UI) return { ok: false, error: "missing moltbotA2UI" };
+        if (!globalThis.culturabuilderA2UI) return { ok: false, error: "missing culturabuilderA2UI" };
         const messages = $messagesJson;
-        return globalThis.clawdbotA2UI.applyMessages(messages);
+        return globalThis.culturabuilderA2UI.applyMessages(messages);
       } catch (e) {
         return { ok: false, error: String(e?.message ?? e) };
       }

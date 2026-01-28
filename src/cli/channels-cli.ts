@@ -76,7 +76,7 @@ export function registerChannelsCli(program: Command) {
       () =>
         `\n${theme.muted("Docs:")} ${formatDocsLink(
           "/cli/channels",
-          "docs.molt.bot/cli/channels",
+          "docs.culturabuilder.com/cli/channels",
         )}\n`,
     );
 

@@ -1,4 +1,4 @@
-# Google Antigravity Auth (Clawdbot plugin)
+# Google Antigravity Auth (Culturabuilder plugin)
 
 OAuth provider plugin for **Google Antigravity** (Cloud Code Assist).
 
@@ -7,7 +7,7 @@ OAuth provider plugin for **Google Antigravity** (Cloud Code Assist).
 Bundled plugins are disabled by default. Enable this one:
 
 ```bash
-clawdbot plugins enable google-antigravity-auth
+culturabuilder plugins enable google-antigravity-auth
 ```
 
 Restart the Gateway after enabling.
@@ -15,7 +15,7 @@ Restart the Gateway after enabling.
 ## Authenticate
 
 ```bash
-clawdbot models auth login --provider google-antigravity --set-default
+culturabuilder models auth login --provider google-antigravity --set-default
 ```
 
 ## Notes

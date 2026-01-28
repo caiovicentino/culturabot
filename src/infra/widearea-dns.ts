@@ -4,8 +4,8 @@ import path from "node:path";
 
 import { CONFIG_DIR, ensureDir } from "../utils.js";
 
-export const WIDE_AREA_DISCOVERY_DOMAIN = "moltbot.internal.";
-export const WIDE_AREA_ZONE_FILENAME = "moltbot.internal.db";
+export const WIDE_AREA_DISCOVERY_DOMAIN = "culturabuilder.internal.";
+export const WIDE_AREA_ZONE_FILENAME = "culturabuilder.internal.db";
 
 export function getWideAreaZonePath(): string {
   return path.join(CONFIG_DIR, "dns", WIDE_AREA_ZONE_FILENAME);
@@ -51,7 +51,7 @@ function extractSerial(zoneText: string): number | null {
 }
 
 function extractContentHash(zoneText: string): string | null {
-  const match = zoneText.match(/^\s*;\s*moltbot-content-hash:\s*(\S+)\s*$/m);
+  const match = zoneText.match(/^\s*;\s*culturabuilder-content-hash:\s*(\S+)\s*$/m);
   return match?.[1] ?? null;
 }
 
@@ -80,9 +80,9 @@ export type WideAreaGatewayZoneOpts = {
 };
 
 function renderZone(opts: WideAreaGatewayZoneOpts & { serial: number }): string {
-  const hostname = os.hostname().split(".")[0] ?? "moltbot";
-  const hostLabel = dnsLabel(opts.hostLabel ?? hostname, "moltbot");
-  const instanceLabel = dnsLabel(opts.instanceLabel ?? `${hostname}-gateway`, "moltbot-gw");
+  const hostname = os.hostname().split(".")[0] ?? "culturabuilder";
+  const hostLabel = dnsLabel(opts.hostLabel ?? hostname, "culturabuilder");
+  const instanceLabel = dnsLabel(opts.instanceLabel ?? `${hostname}-gateway`, "culturabuilder-gw");
 
   const txt = [
     `displayName=${opts.displayName.trim() || hostname}`,
@@ -119,9 +119,11 @@ function renderZone(opts: WideAreaGatewayZoneOpts & { serial: number }): string 
     records.push(`${hostLabel} IN AAAA ${opts.tailnetIPv6}`);
   }
 
-  records.push(`_moltbot-gw._tcp IN PTR ${instanceLabel}._moltbot-gw._tcp`);
-  records.push(`${instanceLabel}._moltbot-gw._tcp IN SRV 0 0 ${opts.gatewayPort} ${hostLabel}`);
-  records.push(`${instanceLabel}._moltbot-gw._tcp IN TXT ${txt.map(txtQuote).join(" ")}`);
+  records.push(`_culturabuilder-gw._tcp IN PTR ${instanceLabel}._culturabuilder-gw._tcp`);
+  records.push(
+    `${instanceLabel}._culturabuilder-gw._tcp IN SRV 0 0 ${opts.gatewayPort} ${hostLabel}`,
+  );
+  records.push(`${instanceLabel}._culturabuilder-gw._tcp IN TXT ${txt.map(txtQuote).join(" ")}`);
 
   const contentBody = `${records.join("\n")}\n`;
   const hashBody = `${records
@@ -131,7 +133,7 @@ function renderZone(opts: WideAreaGatewayZoneOpts & { serial: number }): string 
     .join("\n")}\n`;
   const contentHash = computeContentHash(hashBody);
 
-  return `; moltbot-content-hash: ${contentHash}\n${contentBody}`;
+  return `; culturabuilder-content-hash: ${contentHash}\n${contentBody}`;
 }
 
 export function renderWideAreaGatewayZoneText(

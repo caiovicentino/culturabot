@@ -66,8 +66,8 @@ const DEFAULT_TIMEOUT_MS = 20 * 60_000;
 const MAX_LOG_CHARS = 8000;
 const PREFLIGHT_MAX_COMMITS = 10;
 const START_DIRS = ["cwd", "argv1", "process"];
-const DEFAULT_PACKAGE_NAME = "moltbot";
-const CORE_PACKAGE_NAMES = new Set([DEFAULT_PACKAGE_NAME, "moltbot"]);
+const DEFAULT_PACKAGE_NAME = "culturabuilder";
+const CORE_PACKAGE_NAMES = new Set([DEFAULT_PACKAGE_NAME]);
 
 function normalizeDir(value?: string | null) {
   if (!value) return null;
@@ -291,7 +291,7 @@ function managerInstallArgs(manager: "pnpm" | "bun" | "npm") {
 function normalizeTag(tag?: string) {
   const trimmed = tag?.trim();
   if (!trimmed) return "latest";
-  if (trimmed.startsWith("moltbot@")) return trimmed.slice("moltbot@".length);
+  if (trimmed.startsWith("culturabuilder@")) return trimmed.slice("culturabuilder@".length);
   if (trimmed.startsWith(`${DEFAULT_PACKAGE_NAME}@`)) {
     return trimmed.slice(`${DEFAULT_PACKAGE_NAME}@`.length);
   }
@@ -347,7 +347,7 @@ export async function runGatewayUpdate(opts: UpdateRunnerOptions = {}): Promise<
       status: "error",
       mode: "unknown",
       root: gitRoot,
-      reason: "not-moltbot-root",
+      reason: "not-culturabuilder-root",
       steps: [],
       durationMs: Date.now() - startedAt,
     };
@@ -502,7 +502,9 @@ export async function runGatewayUpdate(opts: UpdateRunnerOptions = {}): Promise<
       }
 
       const manager = await detectPackageManager(gitRoot);
-      const preflightRoot = await fs.mkdtemp(path.join(os.tmpdir(), "moltbot-update-preflight-"));
+      const preflightRoot = await fs.mkdtemp(
+        path.join(os.tmpdir(), "culturabuilder-update-preflight-"),
+      );
       const worktreeDir = path.join(preflightRoot, "worktree");
       const worktreeStep = await runStep(
         step(
@@ -689,10 +691,10 @@ export async function runGatewayUpdate(opts: UpdateRunnerOptions = {}): Promise<
 
     const doctorStep = await runStep(
       step(
-        "moltbot doctor",
-        managerScriptArgs(manager, "moltbot", ["doctor", "--non-interactive"]),
+        "culturabuilder doctor",
+        managerScriptArgs(manager, "culturabuilder", ["doctor", "--non-interactive"]),
         gitRoot,
-        { CLAWDBOT_UPDATE_IN_PROGRESS: "1" },
+        { CULTURABUILDER_UPDATE_IN_PROGRESS: "1" },
       ),
     );
     steps.push(doctorStep);

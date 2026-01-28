@@ -1,17 +1,17 @@
 import type {
   ChannelOnboardingAdapter,
   ChannelOnboardingDmPolicy,
-  MoltbotConfig,
+  CulturabuilderConfig,
   DmPolicy,
   WizardPrompter,
-} from "clawdbot/plugin-sdk";
+} from "culturabuilder/plugin-sdk";
 import {
   DEFAULT_ACCOUNT_ID,
   addWildcardAllowFrom,
   formatDocsLink,
   normalizeAccountId,
   promptAccountId,
-} from "clawdbot/plugin-sdk";
+} from "culturabuilder/plugin-sdk";
 import {
   listBlueBubblesAccountIds,
   resolveBlueBubblesAccount,
@@ -22,7 +22,7 @@ import { parseBlueBubblesAllowTarget, normalizeBlueBubblesHandle } from "./targe
 
 const channel = "bluebubbles" as const;
 
-function setBlueBubblesDmPolicy(cfg: MoltbotConfig, dmPolicy: DmPolicy): MoltbotConfig {
+function setBlueBubblesDmPolicy(cfg: CulturabuilderConfig, dmPolicy: DmPolicy): CulturabuilderConfig {
   const allowFrom =
     dmPolicy === "open" ? addWildcardAllowFrom(cfg.channels?.bluebubbles?.allowFrom) : undefined;
   return {
@@ -39,10 +39,10 @@ function setBlueBubblesDmPolicy(cfg: MoltbotConfig, dmPolicy: DmPolicy): Moltbot
 }
 
 function setBlueBubblesAllowFrom(
-  cfg: MoltbotConfig,
+  cfg: CulturabuilderConfig,
   accountId: string,
   allowFrom: string[],
-): MoltbotConfig {
+): CulturabuilderConfig {
   if (accountId === DEFAULT_ACCOUNT_ID) {
     return {
       ...cfg,
@@ -81,10 +81,10 @@ function parseBlueBubblesAllowFromInput(raw: string): string[] {
 }
 
 async function promptBlueBubblesAllowFrom(params: {
-  cfg: MoltbotConfig;
+  cfg: CulturabuilderConfig;
   prompter: WizardPrompter;
   accountId?: string;
-}): Promise<MoltbotConfig> {
+}): Promise<CulturabuilderConfig> {
   const accountId =
     params.accountId && normalizeAccountId(params.accountId)
       ? (normalizeAccountId(params.accountId) ?? DEFAULT_ACCOUNT_ID)
@@ -318,7 +318,7 @@ export const blueBubblesOnboardingAdapter: ChannelOnboardingAdapter = {
       [
         "Configure the webhook URL in BlueBubbles Server:",
         "1. Open BlueBubbles Server → Settings → Webhooks",
-        "2. Add your Moltbot gateway URL + webhook path",
+        "2. Add your Culturabuilder gateway URL + webhook path",
         "   Example: https://your-gateway-host:3000/bluebubbles-webhook",
         "3. Enable the webhook and save",
         "",

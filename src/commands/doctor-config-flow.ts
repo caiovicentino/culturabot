@@ -1,8 +1,8 @@
 import type { ZodIssue } from "zod";
 
-import type { MoltbotConfig } from "../config/config.js";
+import type { CulturabuilderConfig } from "../config/config.js";
 import {
-  MoltbotSchema,
+  CulturabuilderSchema,
   CONFIG_PATH,
   migrateLegacyConfig,
   readConfigFileSnapshot,
@@ -60,16 +60,16 @@ function resolvePathTarget(root: unknown, path: Array<string | number>): unknown
   return current;
 }
 
-function stripUnknownConfigKeys(config: MoltbotConfig): {
-  config: MoltbotConfig;
+function stripUnknownConfigKeys(config: CulturabuilderConfig): {
+  config: CulturabuilderConfig;
   removed: string[];
 } {
-  const parsed = MoltbotSchema.safeParse(config);
+  const parsed = CulturabuilderSchema.safeParse(config);
   if (parsed.success) {
     return { config, removed: [] };
   }
 
-  const next = structuredClone(config) as MoltbotConfig;
+  const next = structuredClone(config) as CulturabuilderConfig;
   const removed: string[] = [];
   for (const issue of parsed.error.issues) {
     if (!isUnrecognizedKeysIssue(issue)) continue;
@@ -88,7 +88,7 @@ function stripUnknownConfigKeys(config: MoltbotConfig): {
   return { config: next, removed };
 }
 
-function noteOpencodeProviderOverrides(cfg: MoltbotConfig) {
+function noteOpencodeProviderOverrides(cfg: CulturabuilderConfig) {
   const providers = cfg.models?.providers;
   if (!providers) return;
 
@@ -124,8 +124,8 @@ export async function loadAndMaybeMigrateDoctorConfig(params: {
   const shouldRepair = params.options.repair === true || params.options.yes === true;
   const snapshot = await readConfigFileSnapshot();
   const baseCfg = snapshot.config ?? {};
-  let cfg: MoltbotConfig = baseCfg;
-  let candidate = structuredClone(baseCfg) as MoltbotConfig;
+  let cfg: CulturabuilderConfig = baseCfg;
+  let candidate = structuredClone(baseCfg) as CulturabuilderConfig;
   let pendingChanges = false;
   let shouldWriteConfig = false;
   const fixHints: string[] = [];
@@ -156,7 +156,7 @@ export async function loadAndMaybeMigrateDoctorConfig(params: {
       if (migrated) cfg = migrated;
     } else {
       fixHints.push(
-        `Run "${formatCliCommand("moltbot doctor --fix")}" to apply legacy migrations.`,
+        `Run "${formatCliCommand("culturabuilder doctor --fix")}" to apply legacy migrations.`,
       );
     }
   }
@@ -169,7 +169,9 @@ export async function loadAndMaybeMigrateDoctorConfig(params: {
     if (shouldRepair) {
       cfg = normalized.config;
     } else {
-      fixHints.push(`Run "${formatCliCommand("moltbot doctor --fix")}" to apply these changes.`);
+      fixHints.push(
+        `Run "${formatCliCommand("culturabuilder doctor --fix")}" to apply these changes.`,
+      );
     }
   }
 
@@ -181,7 +183,9 @@ export async function loadAndMaybeMigrateDoctorConfig(params: {
     if (shouldRepair) {
       cfg = autoEnable.config;
     } else {
-      fixHints.push(`Run "${formatCliCommand("moltbot doctor --fix")}" to apply these changes.`);
+      fixHints.push(
+        `Run "${formatCliCommand("culturabuilder doctor --fix")}" to apply these changes.`,
+      );
     }
   }
 
@@ -195,7 +199,7 @@ export async function loadAndMaybeMigrateDoctorConfig(params: {
       note(lines, "Doctor changes");
     } else {
       note(lines, "Unknown config keys");
-      fixHints.push('Run "moltbot doctor --fix" to remove these keys.');
+      fixHints.push('Run "culturabuilder doctor --fix" to remove these keys.');
     }
   }
 

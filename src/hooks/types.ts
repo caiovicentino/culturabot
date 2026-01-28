@@ -7,7 +7,7 @@ export type HookInstallSpec = {
   bins?: string[];
 };
 
-export type MoltbotHookMetadata = {
+export type CulturabuilderHookMetadata = {
   always?: boolean;
   hookKey?: string;
   emoji?: string;
@@ -35,7 +35,11 @@ export type ParsedHookFrontmatter = Record<string, string>;
 export type Hook = {
   name: string;
   description: string;
-  source: "moltbot-bundled" | "moltbot-managed" | "moltbot-workspace" | "moltbot-plugin";
+  source:
+    | "culturabuilder-bundled"
+    | "culturabuilder-managed"
+    | "culturabuilder-workspace"
+    | "culturabuilder-plugin";
   pluginId?: string;
   filePath: string; // Path to HOOK.md
   baseDir: string; // Directory containing hook
@@ -47,7 +51,7 @@ export type HookSource = Hook["source"];
 export type HookEntry = {
   hook: Hook;
   frontmatter: ParsedHookFrontmatter;
-  metadata?: MoltbotHookMetadata;
+  metadata?: CulturabuilderHookMetadata;
   invocation?: HookInvocationPolicy;
 };
 

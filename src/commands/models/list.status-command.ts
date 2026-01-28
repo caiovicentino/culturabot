@@ -1,5 +1,5 @@
 import path from "node:path";
-import { resolveMoltbotAgentDir } from "../../agents/agent-paths.js";
+import { resolveCulturabuilderAgentDir } from "../../agents/agent-paths.js";
 import {
   buildAuthHealthSummary,
   DEFAULT_OAUTH_WARN_MS,
@@ -93,7 +93,7 @@ export async function modelsStatusCommand(
   );
   const allowed = Object.keys(cfg.agents?.defaults?.models ?? {});
 
-  const agentDir = resolveMoltbotAgentDir();
+  const agentDir = resolveCulturabuilderAgentDir();
   const store = ensureAuthProfileStore();
   const modelsPath = path.join(agentDir, "models.json");
 
@@ -487,8 +487,8 @@ export async function modelsStatusCommand(
     for (const provider of missingProvidersInUse) {
       const hint =
         provider === "anthropic"
-          ? `Run \`claude setup-token\`, then \`${formatCliCommand("moltbot models auth setup-token")}\` or \`${formatCliCommand("moltbot configure")}\`.`
-          : `Run \`${formatCliCommand("moltbot configure")}\` or set an API key env var.`;
+          ? `Run \`claude setup-token\`, then \`${formatCliCommand("culturabuilder models auth setup-token")}\` or \`${formatCliCommand("culturabuilder configure")}\`.`
+          : `Run \`${formatCliCommand("culturabuilder configure")}\` or set an API key env var.`;
       runtime.log(`- ${theme.heading(provider)} ${hint}`);
     }
   }

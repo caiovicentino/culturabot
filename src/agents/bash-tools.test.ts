@@ -318,16 +318,16 @@ describe("buildDockerExecArgs", () => {
     });
 
     const commandArg = args[args.length - 1];
-    expect(args).toContain("CLAWDBOT_PREPEND_PATH=/custom/bin:/usr/local/bin:/usr/bin");
-    expect(commandArg).toContain('export PATH="${CLAWDBOT_PREPEND_PATH}:$PATH"');
+    expect(args).toContain("CULTURABUILDER_PREPEND_PATH=/custom/bin:/usr/local/bin:/usr/bin");
+    expect(commandArg).toContain('export PATH="${CULTURABUILDER_PREPEND_PATH}:$PATH"');
     expect(commandArg).toContain("echo hello");
     expect(commandArg).toBe(
-      'export PATH="${CLAWDBOT_PREPEND_PATH}:$PATH"; unset CLAWDBOT_PREPEND_PATH; echo hello',
+      'export PATH="${CULTURABUILDER_PREPEND_PATH}:$PATH"; unset CULTURABUILDER_PREPEND_PATH; echo hello',
     );
   });
 
   it("does not interpolate PATH into the shell command", () => {
-    const injectedPath = "$(touch /tmp/moltbot-path-injection)";
+    const injectedPath = "$(touch /tmp/culturabuilder-path-injection)";
     const args = buildDockerExecArgs({
       containerName: "test-container",
       command: "echo hello",
@@ -339,9 +339,9 @@ describe("buildDockerExecArgs", () => {
     });
 
     const commandArg = args[args.length - 1];
-    expect(args).toContain(`CLAWDBOT_PREPEND_PATH=${injectedPath}`);
+    expect(args).toContain(`CULTURABUILDER_PREPEND_PATH=${injectedPath}`);
     expect(commandArg).not.toContain(injectedPath);
-    expect(commandArg).toContain("CLAWDBOT_PREPEND_PATH");
+    expect(commandArg).toContain("CULTURABUILDER_PREPEND_PATH");
   });
 
   it("does not add PATH export when PATH is not in env", () => {

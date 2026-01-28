@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 import { resolveBlueBubblesAccount } from "./accounts.js";
-import type { MoltbotConfig } from "clawdbot/plugin-sdk";
+import type { CulturabuilderConfig } from "culturabuilder/plugin-sdk";
 import { blueBubblesFetchWithTimeout, buildBlueBubblesApiUrl } from "./types.js";
 
 export type BlueBubblesChatOpts = {
@@ -8,7 +8,7 @@ export type BlueBubblesChatOpts = {
   password?: string;
   accountId?: string;
   timeoutMs?: number;
-  cfg?: MoltbotConfig;
+  cfg?: CulturabuilderConfig;
 };
 
 function resolveAccount(params: BlueBubblesChatOpts) {

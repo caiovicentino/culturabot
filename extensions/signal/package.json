@@ -1,9 +1,9 @@
 {
-  "name": "@moltbot/signal",
+  "name": "@culturabuilder/signal",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot Signal channel plugin",
-  "moltbot": {
+  "description": "Culturabuilder Signal channel plugin",
+  "culturabuilder": {
     "extensions": [
       "./index.ts"
     ]

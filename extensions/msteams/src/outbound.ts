@@ -1,4 +1,4 @@
-import type { ChannelOutboundAdapter } from "clawdbot/plugin-sdk";
+import type { ChannelOutboundAdapter } from "culturabuilder/plugin-sdk";
 
 import { createMSTeamsPollStoreFs } from "./polls.js";
 import { getMSTeamsRuntime } from "./runtime.js";

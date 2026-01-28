@@ -1,7 +1,7 @@
 import type { Api, Model } from "@mariozechner/pi-ai";
 import { discoverAuthStorage, discoverModels } from "@mariozechner/pi-coding-agent";
 
-import { resolveMoltbotAgentDir } from "../../agents/agent-paths.js";
+import { resolveCulturabuilderAgentDir } from "../../agents/agent-paths.js";
 import type { AuthProfileStore } from "../../agents/auth-profiles.js";
 import { listProfilesForProvider } from "../../agents/auth-profiles.js";
 import {
@@ -9,8 +9,8 @@ import {
   resolveAwsSdkEnvVarName,
   resolveEnvApiKey,
 } from "../../agents/model-auth.js";
-import { ensureMoltbotModelsJson } from "../../agents/models-config.js";
-import type { MoltbotConfig } from "../../config/config.js";
+import { ensureCulturabuilderModelsJson } from "../../agents/models-config.js";
+import type { CulturabuilderConfig } from "../../config/config.js";
 import type { ModelRow } from "./list.types.js";
 import { modelKey } from "./shared.js";
 
@@ -30,7 +30,11 @@ const isLocalBaseUrl = (baseUrl: string) => {
   }
 };
 
-const hasAuthForProvider = (provider: string, cfg: MoltbotConfig, authStore: AuthProfileStore) => {
+const hasAuthForProvider = (
+  provider: string,
+  cfg: CulturabuilderConfig,
+  authStore: AuthProfileStore,
+) => {
   if (listProfilesForProvider(authStore, provider).length > 0) return true;
   if (provider === "amazon-bedrock" && resolveAwsSdkEnvVarName()) return true;
   if (resolveEnvApiKey(provider)) return true;
@@ -38,9 +42,9 @@ const hasAuthForProvider = (provider: string, cfg: MoltbotConfig, authStore: Aut
   return false;
 };
 
-export async function loadModelRegistry(cfg: MoltbotConfig) {
-  await ensureMoltbotModelsJson(cfg);
-  const agentDir = resolveMoltbotAgentDir();
+export async function loadModelRegistry(cfg: CulturabuilderConfig) {
+  await ensureCulturabuilderModelsJson(cfg);
+  const agentDir = resolveCulturabuilderAgentDir();
   const authStorage = discoverAuthStorage(agentDir);
   const registry = discoverModels(authStorage, agentDir);
   const models = registry.getAll() as Model<Api>[];
@@ -55,7 +59,7 @@ export function toModelRow(params: {
   tags: string[];
   aliases?: string[];
   availableKeys?: Set<string>;
-  cfg?: MoltbotConfig;
+  cfg?: CulturabuilderConfig;
   authStore?: AuthProfileStore;
 }): ModelRow {
   const { model, key, tags, aliases = [], availableKeys, cfg, authStore } = params;

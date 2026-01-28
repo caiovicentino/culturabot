@@ -8,7 +8,7 @@ import {
   resolveMentionGating,
   formatAllowlistMatchMeta,
   type HistoryEntry,
-} from "clawdbot/plugin-sdk";
+} from "culturabuilder/plugin-sdk";
 
 import {
   buildMSTeamsAttachmentPlaceholder,

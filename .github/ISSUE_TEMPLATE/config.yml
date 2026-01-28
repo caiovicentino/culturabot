@@ -1,8 +1,11 @@
 blank_issues_enabled: true
 contact_links:
-  - name: Onboarding
-    url: https://discord.gg/clawd
-    about: New to Clawdbot? Join Discord for setup guidance from Krill in #help.
-  - name: Support
-    url: https://discord.gg/clawd
-    about: Get help from Krill and the community on Discord in #help.
+  - name: Comunidade CulturaBuilder
+    url: https://culturabuilder.com/comunidade
+    about: Novo no CulturaBuilder? Junte-se a nossa comunidade para suporte e orientacao.
+  - name: Suporte
+    url: https://github.com/caiovicentino/culturabot/discussions
+    about: Obtenha ajuda da comunidade CulturaBuilder nas Discussoes do GitHub.
+  - name: Website
+    url: https://culturabuilder.com
+    about: Visite nosso site para mais informacoes sobre a maior comunidade de builders do Brasil.

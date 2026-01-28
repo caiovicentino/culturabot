@@ -5,7 +5,7 @@ import path from "node:path";
 import type { Command } from "commander";
 
 import { readConfigFileSnapshot, writeConfigFile } from "../config/config.js";
-import { resolveMoltbotPackageRoot } from "../infra/moltbot-root.js";
+import { resolveCulturabuilderPackageRoot } from "../infra/culturabuilder-root.js";
 import {
   checkUpdateStatus,
   compareSemverStrings,
@@ -81,7 +81,7 @@ const STEP_LABELS: Record<string, string> = {
   "deps install": "Installing dependencies",
   build: "Building",
   "ui:build": "Building UI",
-  "moltbot doctor": "Running doctor checks",
+  "culturabuilder doctor": "Running doctor checks",
   "git rev-parse HEAD (after)": "Verifying update",
   "global update": "Updating via package manager",
   "global install": "Installing global package",
@@ -89,16 +89,16 @@ const STEP_LABELS: Record<string, string> = {
 
 const UPDATE_QUIPS = [
   "Leveled up! New skills unlocked. You're welcome.",
-  "Fresh code, same lobster. Miss me?",
+  "Fresh code, same builder. Miss me?",
   "Back and better. Did you even notice I was gone?",
   "Update complete. I learned some new tricks while I was out.",
   "Upgraded! Now with 23% more sass.",
   "I've evolved. Try to keep up.",
   "New version, who dis? Oh right, still me but shinier.",
-  "Patched, polished, and ready to pinch. Let's go.",
-  "The lobster has molted. Harder shell, sharper claws.",
+  "Patched, polished, and ready to build. Let's go.",
+  "The builder has leveled up. Stronger foundation, sharper tools.",
   "Update done! Check the changelog or just trust me, it's good.",
-  "Reborn from the boiling waters of npm. Stronger now.",
+  "Reborn from the depths of npm. Stronger now.",
   "I went away and came back smarter. You should try it sometime.",
   "Update complete. The bugs feared me, so they left.",
   "New version installed. Old version sends its regards.",
@@ -106,22 +106,22 @@ const UPDATE_QUIPS = [
   "I've seen things you wouldn't believe. Anyway, I'm updated.",
   "Back online. The changelog is long but our friendship is longer.",
   "Upgraded! Peter fixed stuff. Blame him if it breaks.",
-  "Molting complete. Please don't look at my soft shell phase.",
+  "Upgrade complete. Please don't look at my previous version.",
   "Version bump! Same chaos energy, fewer crashes (probably).",
 ];
 
 const MAX_LOG_CHARS = 8000;
-const DEFAULT_PACKAGE_NAME = "moltbot";
-const CORE_PACKAGE_NAMES = new Set([DEFAULT_PACKAGE_NAME, "moltbot"]);
+const DEFAULT_PACKAGE_NAME = "culturabuilder";
+const CORE_PACKAGE_NAMES = new Set([DEFAULT_PACKAGE_NAME]);
 const CLI_NAME = resolveCliName();
-const CLAWDBOT_REPO_URL = "https://github.com/moltbot/moltbot.git";
-const DEFAULT_GIT_DIR = path.join(os.homedir(), "moltbot");
+const CULTURABUILDER_REPO_URL = "https://github.com/caiovicentino/culturabot.git";
+const DEFAULT_GIT_DIR = path.join(os.homedir(), "culturabuilder");
 
 function normalizeTag(value?: string | null): string | null {
   if (!value) return null;
   const trimmed = value.trim();
   if (!trimmed) return null;
-  if (trimmed.startsWith("moltbot@")) return trimmed.slice("moltbot@".length);
+  if (trimmed.startsWith("culturabuilder@")) return trimmed.slice("culturabuilder@".length);
   if (trimmed.startsWith(`${DEFAULT_PACKAGE_NAME}@`)) {
     return trimmed.slice(`${DEFAULT_PACKAGE_NAME}@`.length);
   }
@@ -200,7 +200,7 @@ async function isEmptyDir(targetPath: string): Promise<boolean> {
 }
 
 function resolveGitInstallDir(): string {
-  const override = process.env.CLAWDBOT_GIT_DIR?.trim();
+  const override = process.env.CULTURABUILDER_GIT_DIR?.trim();
   if (override) return path.resolve(override);
   return DEFAULT_GIT_DIR;
 }
@@ -261,7 +261,7 @@ async function ensureGitCheckout(params: {
   if (!dirExists) {
     return await runUpdateStep({
       name: "git clone",
-      argv: ["git", "clone", CLAWDBOT_REPO_URL, params.dir],
+      argv: ["git", "clone", CULTURABUILDER_REPO_URL, params.dir],
       timeoutMs: params.timeoutMs,
       progress: params.progress,
     });
@@ -271,12 +271,12 @@ async function ensureGitCheckout(params: {
     const empty = await isEmptyDir(params.dir);
     if (!empty) {
       throw new Error(
-        `CLAWDBOT_GIT_DIR points at a non-git directory: ${params.dir}. Set CLAWDBOT_GIT_DIR to an empty folder or a moltbot checkout.`,
+        `CULTURABUILDER_GIT_DIR points at a non-git directory: ${params.dir}. Set CULTURABUILDER_GIT_DIR to an empty folder or a culturabuilder checkout.`,
       );
     }
     return await runUpdateStep({
       name: "git clone",
-      argv: ["git", "clone", CLAWDBOT_REPO_URL, params.dir],
+      argv: ["git", "clone", CULTURABUILDER_REPO_URL, params.dir],
       cwd: params.dir,
       timeoutMs: params.timeoutMs,
       progress: params.progress,
@@ -284,7 +284,7 @@ async function ensureGitCheckout(params: {
   }
 
   if (!(await isCorePackage(params.dir))) {
-    throw new Error(`CLAWDBOT_GIT_DIR does not look like a core checkout: ${params.dir}.`);
+    throw new Error(`CULTURABUILDER_GIT_DIR does not look like a core checkout: ${params.dir}.`);
   }
 
   return null;
@@ -336,7 +336,7 @@ export async function updateStatusCommand(opts: UpdateStatusOptions): Promise<vo
   }
 
   const root =
-    (await resolveMoltbotPackageRoot({
+    (await resolveCulturabuilderPackageRoot({
       moduleUrl: import.meta.url,
       argv1: process.argv[1],
       cwd: process.cwd(),
@@ -411,7 +411,7 @@ export async function updateStatusCommand(opts: UpdateStatusOptions): Promise<vo
     },
   ];
 
-  defaultRuntime.log(theme.heading("Moltbot update status"));
+  defaultRuntime.log(theme.heading("Culturabuilder update status"));
   defaultRuntime.log("");
   defaultRuntime.log(
     renderTable({
@@ -576,7 +576,7 @@ export async function updateCommand(opts: UpdateCommandOptions): Promise<void> {
   }
 
   const root =
-    (await resolveMoltbotPackageRoot({
+    (await resolveCulturabuilderPackageRoot({
       moduleUrl: import.meta.url,
       argv1: process.argv[1],
       cwd: process.cwd(),
@@ -685,7 +685,7 @@ export async function updateCommand(opts: UpdateCommandOptions): Promise<void> {
   const showProgress = !opts.json && process.stdout.isTTY;
 
   if (!opts.json) {
-    defaultRuntime.log(theme.heading("Updating Moltbot..."));
+    defaultRuntime.log(theme.heading("Updating Culturabuilder..."));
     defaultRuntime.log("");
   }
 
@@ -823,12 +823,12 @@ export async function updateCommand(opts: UpdateCommandOptions): Promise<void> {
     if (result.reason === "not-git-install") {
       defaultRuntime.log(
         theme.warn(
-          `Skipped: this Moltbot install isn't a git checkout, and the package manager couldn't be detected. Update via your package manager, then run \`${replaceCliName(formatCliCommand("moltbot doctor"), CLI_NAME)}\` and \`${replaceCliName(formatCliCommand("moltbot gateway restart"), CLI_NAME)}\`.`,
+          `Skipped: this Culturabuilder install isn't a git checkout, and the package manager couldn't be detected. Update via your package manager, then run \`${replaceCliName(formatCliCommand("culturabuilder doctor"), CLI_NAME)}\` and \`${replaceCliName(formatCliCommand("culturabuilder gateway restart"), CLI_NAME)}\`.`,
         ),
       );
       defaultRuntime.log(
         theme.muted(
-          `Examples: \`${replaceCliName("npm i -g moltbot@latest", CLI_NAME)}\` or \`${replaceCliName("pnpm add -g moltbot@latest", CLI_NAME)}\``,
+          `Examples: \`${replaceCliName("npm i -g culturabuilder@latest", CLI_NAME)}\` or \`${replaceCliName("pnpm add -g culturabuilder@latest", CLI_NAME)}\``,
         ),
       );
     }
@@ -929,7 +929,7 @@ export async function updateCommand(opts: UpdateCommandOptions): Promise<void> {
       if (!opts.json && restarted) {
         defaultRuntime.log(theme.success("Daemon restarted successfully."));
         defaultRuntime.log("");
-        process.env.CLAWDBOT_UPDATE_IN_PROGRESS = "1";
+        process.env.CULTURABUILDER_UPDATE_IN_PROGRESS = "1";
         try {
           const { doctorCommand } = await import("../commands/doctor.js");
           const interactiveDoctor = Boolean(process.stdin.isTTY) && !opts.json && opts.yes !== true;
@@ -937,7 +937,7 @@ export async function updateCommand(opts: UpdateCommandOptions): Promise<void> {
         } catch (err) {
           defaultRuntime.log(theme.warn(`Doctor failed: ${String(err)}`));
         } finally {
-          delete process.env.CLAWDBOT_UPDATE_IN_PROGRESS;
+          delete process.env.CULTURABUILDER_UPDATE_IN_PROGRESS;
         }
       }
     } catch (err) {
@@ -945,7 +945,7 @@ export async function updateCommand(opts: UpdateCommandOptions): Promise<void> {
         defaultRuntime.log(theme.warn(`Daemon restart failed: ${String(err)}`));
         defaultRuntime.log(
           theme.muted(
-            `You may need to restart the service manually: ${replaceCliName(formatCliCommand("moltbot gateway restart"), CLI_NAME)}`,
+            `You may need to restart the service manually: ${replaceCliName(formatCliCommand("culturabuilder gateway restart"), CLI_NAME)}`,
           ),
         );
       }
@@ -955,13 +955,13 @@ export async function updateCommand(opts: UpdateCommandOptions): Promise<void> {
     if (result.mode === "npm" || result.mode === "pnpm") {
       defaultRuntime.log(
         theme.muted(
-          `Tip: Run \`${replaceCliName(formatCliCommand("moltbot doctor"), CLI_NAME)}\`, then \`${replaceCliName(formatCliCommand("moltbot gateway restart"), CLI_NAME)}\` to apply updates to a running gateway.`,
+          `Tip: Run \`${replaceCliName(formatCliCommand("culturabuilder doctor"), CLI_NAME)}\`, then \`${replaceCliName(formatCliCommand("culturabuilder gateway restart"), CLI_NAME)}\` to apply updates to a running gateway.`,
         ),
       );
     } else {
       defaultRuntime.log(
         theme.muted(
-          `Tip: Run \`${replaceCliName(formatCliCommand("moltbot gateway restart"), CLI_NAME)}\` to apply updates to a running gateway.`,
+          `Tip: Run \`${replaceCliName(formatCliCommand("culturabuilder gateway restart"), CLI_NAME)}\` to apply updates to a running gateway.`,
         ),
       );
     }
@@ -975,7 +975,7 @@ export async function updateCommand(opts: UpdateCommandOptions): Promise<void> {
 export async function updateWizardCommand(opts: UpdateWizardOptions = {}): Promise<void> {
   if (!process.stdin.isTTY) {
     defaultRuntime.error(
-      "Update wizard requires a TTY. Use `moltbot update --channel <stable|beta|dev>` instead.",
+      "Update wizard requires a TTY. Use `culturabuilder update --channel <stable|beta|dev>` instead.",
     );
     defaultRuntime.exit(1);
     return;
@@ -989,7 +989,7 @@ export async function updateWizardCommand(opts: UpdateWizardOptions = {}): Promi
   }
 
   const root =
-    (await resolveMoltbotPackageRoot({
+    (await resolveCulturabuilderPackageRoot({
       moduleUrl: import.meta.url,
       argv1: process.argv[1],
       cwd: process.cwd(),
@@ -1066,7 +1066,7 @@ export async function updateWizardCommand(opts: UpdateWizardOptions = {}): Promi
         const empty = await isEmptyDir(gitDir);
         if (!empty) {
           defaultRuntime.error(
-            `CLAWDBOT_GIT_DIR points at a non-git directory: ${gitDir}. Set CLAWDBOT_GIT_DIR to an empty folder or a moltbot checkout.`,
+            `CULTURABUILDER_GIT_DIR points at a non-git directory: ${gitDir}. Set CULTURABUILDER_GIT_DIR to an empty folder or a culturabuilder checkout.`,
           );
           defaultRuntime.exit(1);
           return;
@@ -1074,7 +1074,7 @@ export async function updateWizardCommand(opts: UpdateWizardOptions = {}): Promi
       }
       const ok = await confirm({
         message: stylePromptMessage(
-          `Create a git checkout at ${gitDir}? (override via CLAWDBOT_GIT_DIR)`,
+          `Create a git checkout at ${gitDir}? (override via CULTURABUILDER_GIT_DIR)`,
         ),
         initialValue: true,
       });
@@ -1111,7 +1111,7 @@ export async function updateWizardCommand(opts: UpdateWizardOptions = {}): Promi
 export function registerUpdateCli(program: Command) {
   const update = program
     .command("update")
-    .description("Update Moltbot to the latest version")
+    .description("Update Culturabuilder to the latest version")
     .option("--json", "Output result as JSON", false)
     .option("--no-restart", "Skip restarting the gateway service after a successful update")
     .option("--channel <stable|beta|dev>", "Persist update channel (git + npm)")
@@ -1120,15 +1120,15 @@ export function registerUpdateCli(program: Command) {
     .option("--yes", "Skip confirmation prompts (non-interactive)", false)
     .addHelpText("after", () => {
       const examples = [
-        ["moltbot update", "Update a source checkout (git)"],
-        ["moltbot update --channel beta", "Switch to beta channel (git + npm)"],
-        ["moltbot update --channel dev", "Switch to dev channel (git + npm)"],
-        ["moltbot update --tag beta", "One-off update to a dist-tag or version"],
-        ["moltbot update --no-restart", "Update without restarting the service"],
-        ["moltbot update --json", "Output result as JSON"],
-        ["moltbot update --yes", "Non-interactive (accept downgrade prompts)"],
-        ["moltbot update wizard", "Interactive update wizard"],
-        ["moltbot --update", "Shorthand for moltbot update"],
+        ["culturabuilder update", "Update a source checkout (git)"],
+        ["culturabuilder update --channel beta", "Switch to beta channel (git + npm)"],
+        ["culturabuilder update --channel dev", "Switch to dev channel (git + npm)"],
+        ["culturabuilder update --tag beta", "One-off update to a dist-tag or version"],
+        ["culturabuilder update --no-restart", "Update without restarting the service"],
+        ["culturabuilder update --json", "Output result as JSON"],
+        ["culturabuilder update --yes", "Non-interactive (accept downgrade prompts)"],
+        ["culturabuilder update wizard", "Interactive update wizard"],
+        ["culturabuilder --update", "Shorthand for culturabuilder update"],
       ] as const;
       const fmtExamples = examples
         .map(([cmd, desc]) => `  ${theme.command(cmd)} ${theme.muted(`# ${desc}`)}`)
@@ -1140,7 +1140,7 @@ ${theme.heading("What this does:")}
 
 ${theme.heading("Switch channels:")}
   - Use --channel stable|beta|dev to persist the update channel in config
-  - Run moltbot update status to see the active channel and source
+  - Run culturabuilder update status to see the active channel and source
   - Use --tag <dist-tag|version> for a one-off npm update without persisting
 
 ${theme.heading("Non-interactive:")}
@@ -1156,7 +1156,7 @@ ${theme.heading("Notes:")}
   - Downgrades require confirmation (can break configuration)
   - Skips update if the working directory has uncommitted changes
 
-${theme.muted("Docs:")} ${formatDocsLink("/cli/update", "docs.molt.bot/cli/update")}`;
+${theme.muted("Docs:")} ${formatDocsLink("/cli/update", "docs.culturabuilder.com/cli/update")}`;
     })
     .action(async (opts) => {
       try {
@@ -1180,7 +1180,7 @@ ${theme.muted("Docs:")} ${formatDocsLink("/cli/update", "docs.molt.bot/cli/updat
     .option("--timeout <seconds>", "Timeout for each update step in seconds (default: 1200)")
     .addHelpText(
       "after",
-      `\n${theme.muted("Docs:")} ${formatDocsLink("/cli/update", "docs.molt.bot/cli/update")}\n`,
+      `\n${theme.muted("Docs:")} ${formatDocsLink("/cli/update", "docs.culturabuilder.com/cli/update")}\n`,
     )
     .action(async (opts) => {
       try {
@@ -1200,14 +1200,14 @@ ${theme.muted("Docs:")} ${formatDocsLink("/cli/update", "docs.molt.bot/cli/updat
       "after",
       () =>
         `\n${theme.heading("Examples:")}\n${formatHelpExamples([
-          ["moltbot update status", "Show channel + version status."],
-          ["moltbot update status --json", "JSON output."],
-          ["moltbot update status --timeout 10", "Custom timeout."],
+          ["culturabuilder update status", "Show channel + version status."],
+          ["culturabuilder update status --json", "JSON output."],
+          ["culturabuilder update status --timeout 10", "Custom timeout."],
         ])}\n\n${theme.heading("Notes:")}\n${theme.muted(
           "- Shows current update channel (stable/beta/dev) and source",
         )}\n${theme.muted("- Includes git tag/branch/SHA for source checkouts")}\n\n${theme.muted(
           "Docs:",
-        )} ${formatDocsLink("/cli/update", "docs.molt.bot/cli/update")}`,
+        )} ${formatDocsLink("/cli/update", "docs.culturabuilder.com/cli/update")}`,
     )
     .action(async (opts) => {
       try {

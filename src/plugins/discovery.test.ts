@@ -7,30 +7,30 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 const tempDirs: string[] = [];
 
 function makeTempDir() {
-  const dir = path.join(os.tmpdir(), `moltbot-plugins-${randomUUID()}`);
+  const dir = path.join(os.tmpdir(), `culturabuilder-plugins-${randomUUID()}`);
   fs.mkdirSync(dir, { recursive: true });
   tempDirs.push(dir);
   return dir;
 }
 
 async function withStateDir<T>(stateDir: string, fn: () => Promise<T>) {
-  const prev = process.env.CLAWDBOT_STATE_DIR;
-  const prevBundled = process.env.CLAWDBOT_BUNDLED_PLUGINS_DIR;
-  process.env.CLAWDBOT_STATE_DIR = stateDir;
-  process.env.CLAWDBOT_BUNDLED_PLUGINS_DIR = "/nonexistent/bundled/plugins";
+  const prev = process.env.CULTURABUILDER_STATE_DIR;
+  const prevBundled = process.env.CULTURABUILDER_BUNDLED_PLUGINS_DIR;
+  process.env.CULTURABUILDER_STATE_DIR = stateDir;
+  process.env.CULTURABUILDER_BUNDLED_PLUGINS_DIR = "/nonexistent/bundled/plugins";
   vi.resetModules();
   try {
     return await fn();
   } finally {
     if (prev === undefined) {
-      delete process.env.CLAWDBOT_STATE_DIR;
+      delete process.env.CULTURABUILDER_STATE_DIR;
     } else {
-      process.env.CLAWDBOT_STATE_DIR = prev;
+      process.env.CULTURABUILDER_STATE_DIR = prev;
     }
     if (prevBundled === undefined) {
-      delete process.env.CLAWDBOT_BUNDLED_PLUGINS_DIR;
+      delete process.env.CULTURABUILDER_BUNDLED_PLUGINS_DIR;
     } else {
-      process.env.CLAWDBOT_BUNDLED_PLUGINS_DIR = prevBundled;
+      process.env.CULTURABUILDER_BUNDLED_PLUGINS_DIR = prevBundled;
     }
     vi.resetModules();
   }
@@ -46,7 +46,7 @@ afterEach(() => {
   }
 });
 
-describe("discoverMoltbotPlugins", () => {
+describe("discoverCulturabuilderPlugins", () => {
   it("discovers global and workspace extensions", async () => {
     const stateDir = makeTempDir();
     const workspaceDir = path.join(stateDir, "workspace");
@@ -55,13 +55,13 @@ describe("discoverMoltbotPlugins", () => {
     fs.mkdirSync(globalExt, { recursive: true });
     fs.writeFileSync(path.join(globalExt, "alpha.ts"), "export default function () {}", "utf-8");
 
-    const workspaceExt = path.join(workspaceDir, ".clawdbot", "extensions");
+    const workspaceExt = path.join(workspaceDir, ".culturabuilder", "extensions");
     fs.mkdirSync(workspaceExt, { recursive: true });
     fs.writeFileSync(path.join(workspaceExt, "beta.ts"), "export default function () {}", "utf-8");
 
     const { candidates } = await withStateDir(stateDir, async () => {
-      const { discoverMoltbotPlugins } = await import("./discovery.js");
-      return discoverMoltbotPlugins({ workspaceDir });
+      const { discoverCulturabuilderPlugins } = await import("./discovery.js");
+      return discoverCulturabuilderPlugins({ workspaceDir });
     });
 
     const ids = candidates.map((c) => c.idHint);
@@ -78,7 +78,7 @@ describe("discoverMoltbotPlugins", () => {
       path.join(globalExt, "package.json"),
       JSON.stringify({
         name: "pack",
-        moltbot: { extensions: ["./src/one.ts", "./src/two.ts"] },
+        culturabuilder: { extensions: ["./src/one.ts", "./src/two.ts"] },
       }),
       "utf-8",
     );
@@ -94,8 +94,8 @@ describe("discoverMoltbotPlugins", () => {
     );
 
     const { candidates } = await withStateDir(stateDir, async () => {
-      const { discoverMoltbotPlugins } = await import("./discovery.js");
-      return discoverMoltbotPlugins({});
+      const { discoverCulturabuilderPlugins } = await import("./discovery.js");
+      return discoverCulturabuilderPlugins({});
     });
 
     const ids = candidates.map((c) => c.idHint);
@@ -111,8 +111,8 @@ describe("discoverMoltbotPlugins", () => {
     fs.writeFileSync(
       path.join(globalExt, "package.json"),
       JSON.stringify({
-        name: "@moltbot/voice-call",
-        moltbot: { extensions: ["./src/index.ts"] },
+        name: "@culturabuilder/voice-call",
+        culturabuilder: { extensions: ["./src/index.ts"] },
       }),
       "utf-8",
     );
@@ -123,8 +123,8 @@ describe("discoverMoltbotPlugins", () => {
     );
 
     const { candidates } = await withStateDir(stateDir, async () => {
-      const { discoverMoltbotPlugins } = await import("./discovery.js");
-      return discoverMoltbotPlugins({});
+      const { discoverCulturabuilderPlugins } = await import("./discovery.js");
+      return discoverCulturabuilderPlugins({});
     });
 
     const ids = candidates.map((c) => c.idHint);
@@ -139,16 +139,16 @@ describe("discoverMoltbotPlugins", () => {
     fs.writeFileSync(
       path.join(packDir, "package.json"),
       JSON.stringify({
-        name: "@moltbot/demo-plugin-dir",
-        moltbot: { extensions: ["./index.js"] },
+        name: "@culturabuilder/demo-plugin-dir",
+        culturabuilder: { extensions: ["./index.js"] },
       }),
       "utf-8",
     );
     fs.writeFileSync(path.join(packDir, "index.js"), "module.exports = {}", "utf-8");
 
     const { candidates } = await withStateDir(stateDir, async () => {
-      const { discoverMoltbotPlugins } = await import("./discovery.js");
-      return discoverMoltbotPlugins({ extraPaths: [packDir] });
+      const { discoverCulturabuilderPlugins } = await import("./discovery.js");
+      return discoverCulturabuilderPlugins({ extraPaths: [packDir] });
     });
 
     const ids = candidates.map((c) => c.idHint);

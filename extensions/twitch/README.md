@@ -1,17 +1,17 @@
-# @clawdbot/twitch
+# @culturabuilder/twitch
 
-Twitch channel plugin for Clawdbot.
+Twitch channel plugin for Culturabuilder.
 
 ## Install (local checkout)
 
 ```bash
-clawdbot plugins install ./extensions/twitch
+culturabuilder plugins install ./extensions/twitch
 ```
 
 ## Install (npm)
 
 ```bash
-clawdbot plugins install @clawdbot/twitch
+culturabuilder plugins install @culturabuilder/twitch
 ```
 
 Onboarding: select Twitch and confirm the install prompt to fetch the plugin automatically.
@@ -27,7 +27,7 @@ Minimal config (simplified single-account):
   channels: {
     twitch: {
       enabled: true,
-      username: "clawdbot",
+      username: "culturabuilder",
       accessToken: "oauth:abc123...", // OAuth Access Token (add oauth: prefix)
       clientId: "xyz789...", // Client ID from Token Generator
       channel: "vevisk", // Channel to join (required)
@@ -52,13 +52,13 @@ Multi-account config (advanced):
       enabled: true,
       accounts: {
         default: {
-          username: "clawdbot",
+          username: "culturabuilder",
           accessToken: "oauth:abc123...",
           clientId: "xyz789...",
           channel: "vevisk",
         },
         channel2: {
-          username: "clawdbot",
+          username: "culturabuilder",
           accessToken: "oauth:def456...",
           clientId: "uvw012...",
           channel: "secondchannel",
@@ -80,7 +80,7 @@ Multi-account config (advanced):
 
 ## Full documentation
 
-See https://docs.molt.bot/channels/twitch for:
+See https://docs.culturabuilder.com/channels/twitch for:
 
 - Token refresh setup
 - Access control patterns

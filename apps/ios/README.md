@@ -1,4 +1,4 @@
-# Clawdbot (iOS)
+# Culturabuilder (iOS)
 
 Internal-only SwiftUI app scaffold.
 
@@ -11,11 +11,11 @@ brew install swiftformat swiftlint
 ```bash
 cd apps/ios
 xcodegen generate
-open Clawdbot.xcodeproj
+open Culturabuilder.xcodeproj
 ```
 
 ## Shared packages
-- `../shared/MoltbotKit` — shared types/constants used by iOS (and later macOS bridge + gateway routing).
+- `../shared/CulturabuilderKit` — shared types/constants used by iOS (and later macOS bridge + gateway routing).
 
 ## fastlane
 ```bash

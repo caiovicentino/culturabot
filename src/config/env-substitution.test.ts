@@ -247,12 +247,12 @@ describe("resolveConfigEnvVars", () => {
       const config = {
         gateway: {
           auth: {
-            token: "${CLAWDBOT_GATEWAY_TOKEN}",
+            token: "${CULTURABUILDER_GATEWAY_TOKEN}",
           },
         },
       };
       const result = resolveConfigEnvVars(config, {
-        CLAWDBOT_GATEWAY_TOKEN: "secret-token",
+        CULTURABUILDER_GATEWAY_TOKEN: "secret-token",
       });
       expect(result).toEqual({
         gateway: {

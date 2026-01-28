@@ -1,55 +1,55 @@
 ---
-summary: "CLI reference for `moltbot devices` (device pairing + token rotation/revocation)"
+summary: "CLI reference for `culturabuilder devices` (device pairing + token rotation/revocation)"
 read_when:
   - You are approving device pairing requests
   - You need to rotate or revoke device tokens
 ---
 
-# `moltbot devices`
+# `culturabuilder devices`
 
 Manage device pairing requests and device-scoped tokens.
 
 ## Commands
 
-### `moltbot devices list`
+### `culturabuilder devices list`
 
 List pending pairing requests and paired devices.
 
 ```
-moltbot devices list
-moltbot devices list --json
+culturabuilder devices list
+culturabuilder devices list --json
 ```
 
-### `moltbot devices approve <requestId>`
+### `culturabuilder devices approve <requestId>`
 
 Approve a pending device pairing request.
 
 ```
-moltbot devices approve <requestId>
+culturabuilder devices approve <requestId>
 ```
 
-### `moltbot devices reject <requestId>`
+### `culturabuilder devices reject <requestId>`
 
 Reject a pending device pairing request.
 
 ```
-moltbot devices reject <requestId>
+culturabuilder devices reject <requestId>
 ```
 
-### `moltbot devices rotate --device <id> --role <role> [--scope <scope...>]`
+### `culturabuilder devices rotate --device <id> --role <role> [--scope <scope...>]`
 
 Rotate a device token for a specific role (optionally updating scopes).
 
 ```
-moltbot devices rotate --device <deviceId> --role operator --scope operator.read --scope operator.write
+culturabuilder devices rotate --device <deviceId> --role operator --scope operator.read --scope operator.write
 ```
 
-### `moltbot devices revoke --device <id> --role <role>`
+### `culturabuilder devices revoke --device <id> --role <role>`
 
 Revoke a device token for a specific role.
 
 ```
-moltbot devices revoke --device <deviceId> --role node
+culturabuilder devices revoke --device <deviceId> --role node
 ```
 
 ## Common options

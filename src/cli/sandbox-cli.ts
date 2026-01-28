@@ -15,30 +15,33 @@ type CommandOptions = Record<string, unknown>;
 
 const SANDBOX_EXAMPLES = {
   main: [
-    ["moltbot sandbox list", "List all sandbox containers."],
-    ["moltbot sandbox list --browser", "List only browser containers."],
-    ["moltbot sandbox recreate --all", "Recreate all containers."],
-    ["moltbot sandbox recreate --session main", "Recreate a specific session."],
-    ["moltbot sandbox recreate --agent mybot", "Recreate agent containers."],
-    ["moltbot sandbox explain", "Explain effective sandbox config."],
+    ["culturabuilder sandbox list", "List all sandbox containers."],
+    ["culturabuilder sandbox list --browser", "List only browser containers."],
+    ["culturabuilder sandbox recreate --all", "Recreate all containers."],
+    ["culturabuilder sandbox recreate --session main", "Recreate a specific session."],
+    ["culturabuilder sandbox recreate --agent mybot", "Recreate agent containers."],
+    ["culturabuilder sandbox explain", "Explain effective sandbox config."],
   ],
   list: [
-    ["moltbot sandbox list", "List all sandbox containers."],
-    ["moltbot sandbox list --browser", "List only browser containers."],
-    ["moltbot sandbox list --json", "JSON output."],
+    ["culturabuilder sandbox list", "List all sandbox containers."],
+    ["culturabuilder sandbox list --browser", "List only browser containers."],
+    ["culturabuilder sandbox list --json", "JSON output."],
   ],
   recreate: [
-    ["moltbot sandbox recreate --all", "Recreate all containers."],
-    ["moltbot sandbox recreate --session main", "Recreate a specific session."],
-    ["moltbot sandbox recreate --agent mybot", "Recreate a specific agent (includes sub-agents)."],
-    ["moltbot sandbox recreate --browser --all", "Recreate only browser containers."],
-    ["moltbot sandbox recreate --all --force", "Skip confirmation."],
+    ["culturabuilder sandbox recreate --all", "Recreate all containers."],
+    ["culturabuilder sandbox recreate --session main", "Recreate a specific session."],
+    [
+      "culturabuilder sandbox recreate --agent mybot",
+      "Recreate a specific agent (includes sub-agents).",
+    ],
+    ["culturabuilder sandbox recreate --browser --all", "Recreate only browser containers."],
+    ["culturabuilder sandbox recreate --all --force", "Skip confirmation."],
   ],
   explain: [
-    ["moltbot sandbox explain", "Show effective sandbox config."],
-    ["moltbot sandbox explain --session agent:main:main", "Explain a specific session."],
-    ["moltbot sandbox explain --agent work", "Explain an agent sandbox."],
-    ["moltbot sandbox explain --json", "JSON output."],
+    ["culturabuilder sandbox explain", "Show effective sandbox config."],
+    ["culturabuilder sandbox explain --session agent:main:main", "Explain a specific session."],
+    ["culturabuilder sandbox explain --agent work", "Explain an agent sandbox."],
+    ["culturabuilder sandbox explain --json", "JSON output."],
   ],
 } as const;
 
@@ -68,7 +71,7 @@ export function registerSandboxCli(program: Command) {
     .addHelpText(
       "after",
       () =>
-        `\n${theme.muted("Docs:")} ${formatDocsLink("/cli/sandbox", "docs.molt.bot/cli/sandbox")}\n`,
+        `\n${theme.muted("Docs:")} ${formatDocsLink("/cli/sandbox", "docs.culturabuilder.com/cli/sandbox")}\n`,
     )
     .action(() => {
       sandbox.help({ error: true });

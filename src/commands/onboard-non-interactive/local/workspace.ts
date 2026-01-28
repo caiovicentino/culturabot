@@ -1,10 +1,10 @@
-import type { MoltbotConfig } from "../../../config/config.js";
+import type { CulturabuilderConfig } from "../../../config/config.js";
 import { resolveUserPath } from "../../../utils.js";
 import type { OnboardOptions } from "../../onboard-types.js";
 
 export function resolveNonInteractiveWorkspaceDir(params: {
   opts: OnboardOptions;
-  baseConfig: MoltbotConfig;
+  baseConfig: CulturabuilderConfig;
   defaultWorkspaceDir: string;
 }) {
   const raw = (

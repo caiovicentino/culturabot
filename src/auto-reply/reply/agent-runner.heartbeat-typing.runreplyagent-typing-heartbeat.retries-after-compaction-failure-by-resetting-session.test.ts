@@ -126,9 +126,11 @@ describe("runReplyAgent typing (heartbeat)", () => {
   });
 
   it("retries after compaction failure by resetting the session", async () => {
-    const prevStateDir = process.env.CLAWDBOT_STATE_DIR;
-    const stateDir = await fs.mkdtemp(path.join(tmpdir(), "moltbot-session-compaction-reset-"));
-    process.env.CLAWDBOT_STATE_DIR = stateDir;
+    const prevStateDir = process.env.CULTURABUILDER_STATE_DIR;
+    const stateDir = await fs.mkdtemp(
+      path.join(tmpdir(), "culturabuilder-session-compaction-reset-"),
+    );
+    process.env.CULTURABUILDER_STATE_DIR = stateDir;
     try {
       const sessionId = "session";
       const storePath = path.join(stateDir, "sessions", "sessions.json");
@@ -167,17 +169,19 @@ describe("runReplyAgent typing (heartbeat)", () => {
       expect(persisted.main.sessionId).toBe(sessionStore.main.sessionId);
     } finally {
       if (prevStateDir) {
-        process.env.CLAWDBOT_STATE_DIR = prevStateDir;
+        process.env.CULTURABUILDER_STATE_DIR = prevStateDir;
       } else {
-        delete process.env.CLAWDBOT_STATE_DIR;
+        delete process.env.CULTURABUILDER_STATE_DIR;
       }
     }
   });
 
   it("retries after context overflow payload by resetting the session", async () => {
-    const prevStateDir = process.env.CLAWDBOT_STATE_DIR;
-    const stateDir = await fs.mkdtemp(path.join(tmpdir(), "moltbot-session-overflow-reset-"));
-    process.env.CLAWDBOT_STATE_DIR = stateDir;
+    const prevStateDir = process.env.CULTURABUILDER_STATE_DIR;
+    const stateDir = await fs.mkdtemp(
+      path.join(tmpdir(), "culturabuilder-session-overflow-reset-"),
+    );
+    process.env.CULTURABUILDER_STATE_DIR = stateDir;
     try {
       const sessionId = "session";
       const storePath = path.join(stateDir, "sessions", "sessions.json");
@@ -221,17 +225,17 @@ describe("runReplyAgent typing (heartbeat)", () => {
       expect(persisted.main.sessionId).toBe(sessionStore.main.sessionId);
     } finally {
       if (prevStateDir) {
-        process.env.CLAWDBOT_STATE_DIR = prevStateDir;
+        process.env.CULTURABUILDER_STATE_DIR = prevStateDir;
       } else {
-        delete process.env.CLAWDBOT_STATE_DIR;
+        delete process.env.CULTURABUILDER_STATE_DIR;
       }
     }
   });
 
   it("resets the session after role ordering payloads", async () => {
-    const prevStateDir = process.env.CLAWDBOT_STATE_DIR;
-    const stateDir = await fs.mkdtemp(path.join(tmpdir(), "moltbot-session-role-ordering-"));
-    process.env.CLAWDBOT_STATE_DIR = stateDir;
+    const prevStateDir = process.env.CULTURABUILDER_STATE_DIR;
+    const stateDir = await fs.mkdtemp(path.join(tmpdir(), "culturabuilder-session-role-ordering-"));
+    process.env.CULTURABUILDER_STATE_DIR = stateDir;
     try {
       const sessionId = "session";
       const storePath = path.join(stateDir, "sessions", "sessions.json");
@@ -275,9 +279,9 @@ describe("runReplyAgent typing (heartbeat)", () => {
       expect(persisted.main.sessionId).toBe(sessionStore.main.sessionId);
     } finally {
       if (prevStateDir) {
-        process.env.CLAWDBOT_STATE_DIR = prevStateDir;
+        process.env.CULTURABUILDER_STATE_DIR = prevStateDir;
       } else {
-        delete process.env.CLAWDBOT_STATE_DIR;
+        delete process.env.CULTURABUILDER_STATE_DIR;
       }
     }
   });

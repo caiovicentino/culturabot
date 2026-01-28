@@ -14,5 +14,5 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "MoltbotNodeAndroid"
+rootProject.name = "CulturabuilderNodeAndroid"
 include(":app")

@@ -1,6 +1,6 @@
-import MoltbotKit
+import CulturabuilderKit
 import Testing
-@testable import Moltbot
+@testable import Culturabuilder
 
 @Suite struct IOSGatewayChatTransportTests {
     @Test func requestsFailFastWhenGatewayNotConnected() async {

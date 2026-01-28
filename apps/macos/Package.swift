@@ -1,18 +1,18 @@
 // swift-tools-version: 6.2
-// Package manifest for the Moltbot macOS companion (menu bar app + IPC library).
+// Package manifest for the Culturabuilder macOS companion (menu bar app + IPC library).
 
 import PackageDescription
 
 let package = Package(
-    name: "Moltbot",
+    name: "Culturabuilder",
     platforms: [
         .macOS(.v15),
     ],
     products: [
-        .library(name: "MoltbotIPC", targets: ["MoltbotIPC"]),
-        .library(name: "MoltbotDiscovery", targets: ["MoltbotDiscovery"]),
-        .executable(name: "Moltbot", targets: ["Moltbot"]),
-        .executable(name: "moltbot-mac", targets: ["MoltbotMacCLI"]),
+        .library(name: "CulturabuilderIPC", targets: ["CulturabuilderIPC"]),
+        .library(name: "CulturabuilderDiscovery", targets: ["CulturabuilderDiscovery"]),
+        .executable(name: "Culturabuilder", targets: ["Culturabuilder"]),
+        .executable(name: "culturabuilder-mac", targets: ["CulturabuilderMacCLI"]),
     ],
     dependencies: [
         .package(url: "https://github.com/orchetect/MenuBarExtraAccess", exact: "1.2.2"),
@@ -20,33 +20,33 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-log.git", from: "1.8.0"),
         .package(url: "https://github.com/sparkle-project/Sparkle", from: "2.8.1"),
         .package(url: "https://github.com/steipete/Peekaboo.git", branch: "main"),
-        .package(path: "../shared/MoltbotKit"),
+        .package(path: "../shared/CulturabuilderKit"),
         .package(path: "../../Swabble"),
     ],
     targets: [
         .target(
-            name: "MoltbotIPC",
+            name: "CulturabuilderIPC",
             dependencies: [],
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .target(
-            name: "MoltbotDiscovery",
+            name: "CulturabuilderDiscovery",
             dependencies: [
-                .product(name: "MoltbotKit", package: "MoltbotKit"),
+                .product(name: "CulturabuilderKit", package: "CulturabuilderKit"),
             ],
-            path: "Sources/MoltbotDiscovery",
+            path: "Sources/CulturabuilderDiscovery",
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .executableTarget(
-            name: "Moltbot",
+            name: "Culturabuilder",
             dependencies: [
-                "MoltbotIPC",
-                "MoltbotDiscovery",
-                .product(name: "MoltbotKit", package: "MoltbotKit"),
-                .product(name: "MoltbotChatUI", package: "MoltbotKit"),
-                .product(name: "MoltbotProtocol", package: "MoltbotKit"),
+                "CulturabuilderIPC",
+                "CulturabuilderDiscovery",
+                .product(name: "CulturabuilderKit", package: "CulturabuilderKit"),
+                .product(name: "CulturabuilderChatUI", package: "CulturabuilderKit"),
+                .product(name: "CulturabuilderProtocol", package: "CulturabuilderKit"),
                 .product(name: "SwabbleKit", package: "swabble"),
                 .product(name: "MenuBarExtraAccess", package: "MenuBarExtraAccess"),
                 .product(name: "Subprocess", package: "swift-subprocess"),
@@ -59,30 +59,30 @@ let package = Package(
                 "Resources/Info.plist",
             ],
             resources: [
-                .copy("Resources/Moltbot.icns"),
+                .copy("Resources/Culturabuilder.icns"),
                 .copy("Resources/DeviceModels"),
             ],
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .executableTarget(
-            name: "MoltbotMacCLI",
+            name: "CulturabuilderMacCLI",
             dependencies: [
-                "MoltbotDiscovery",
-                .product(name: "MoltbotKit", package: "MoltbotKit"),
-                .product(name: "MoltbotProtocol", package: "MoltbotKit"),
+                "CulturabuilderDiscovery",
+                .product(name: "CulturabuilderKit", package: "CulturabuilderKit"),
+                .product(name: "CulturabuilderProtocol", package: "CulturabuilderKit"),
             ],
-            path: "Sources/MoltbotMacCLI",
+            path: "Sources/CulturabuilderMacCLI",
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .testTarget(
-            name: "MoltbotIPCTests",
+            name: "CulturabuilderIPCTests",
             dependencies: [
-                "MoltbotIPC",
-                "Moltbot",
-                "MoltbotDiscovery",
-                .product(name: "MoltbotProtocol", package: "MoltbotKit"),
+                "CulturabuilderIPC",
+                "Culturabuilder",
+                "CulturabuilderDiscovery",
+                .product(name: "CulturabuilderProtocol", package: "CulturabuilderKit"),
                 .product(name: "SwabbleKit", package: "swabble"),
             ],
             swiftSettings: [

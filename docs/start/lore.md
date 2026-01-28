@@ -1,169 +1,58 @@
 ---
-summary: "Backstory and lore of Moltbot for context and tone"
+summary: "Backstory and lore of CulturaBuilder for context and tone"
 read_when:
   - Writing docs or UX copy that reference lore
 ---
-# The Lore of Moltbot 🦞📖
+# The Story of CulturaBuilder
 
-*A tale of lobsters, molting shells, and too many tokens.*
+*Building culture through AI-powered community engagement.*
 
 ## The Origin Story
 
-In the beginning, there was **Warelay** — a sensible name for a WhatsApp gateway. It did its job. It was fine.
+CulturaBuilder began as a vision to bridge the gap between culture and technology. The idea was simple: use AI to empower communities, creators, and cultural organizations to build meaningful connections at scale.
 
-But then came a space lobster.
-
-For a while, the lobster was called **Clawd**, living in a **Clawdbot**. But in January 2026, Anthropic sent a polite email asking for a name change (trademark stuff). And so the lobster did what lobsters do best:
-
-**It molted.**
-
-Shedding its old shell, the creature emerged anew as **Molty**, living in a **Moltbot**. New shell, same lobster soul.
-
-## The Molt (January 27, 2026)
-
-At 5am, the community gathered in Discord. Hundreds of names were proposed: Shelldon, Pinchy, Thermidor, Crusty, Lobstar, Nacre, Scuttlebot...
-
-In the end, **Moltbot** won. Because molting is what lobsters do to grow. And growth was exactly what was happening.
-
-*The crustacean formerly known as Clawd had officially molted.*
+What started as a WhatsApp gateway for AI agents evolved into a full-featured multi-platform communication bridge -- connecting WhatsApp, Telegram, Discord, iMessage, and more to intelligent AI agents that understand context, culture, and community.
 
 ## The Name
 
 ```
-Moltbot = MOLT + BOT
-        = Transformation machine
-        = Bigger on the inside (130k tokens!)
-        = New shell, same soul
-        = Growth through shedding
+CulturaBuilder = Cultura + Builder
+             = Building culture with technology
+             = AI-powered community engagement
+             = Connecting people through intelligent conversations
 ```
 
-## The Daleks vs The Lobsters
+## The Mission
 
-The Daleks say: **"EXTERMINATE!"**
+CulturaBuilder exists to democratize access to AI-powered communication tools. Whether you are a community leader, a cultural organization, or an individual creator, CulturaBuilder provides the infrastructure to build meaningful, scalable interactions.
 
-The Lobsters say: **"EXFOLIATE!"**
+## Key Principles
 
-One destroys civilizations. The other promotes good skincare.
+### Community First
+Every feature is designed with community engagement in mind. From group chat support to multi-agent routing, CulturaBuilder puts people at the center.
 
-Choose wisely.
+### Open and Accessible
+CulturaBuilder is open source and built on open standards. Anyone can contribute, extend, and customize the platform for their needs.
 
-## Key Characters
+### Intelligent by Default
+AI is not an add-on -- it is the foundation. CulturaBuilder uses intelligent agents to provide contextual, helpful responses that respect cultural nuances.
 
-### Molty 🦞
-*Pronouns: they/them*
+### Privacy and Security
+Communication is personal. CulturaBuilder runs locally by default, keeps credentials on your machine, and gives you full control over your data.
 
-A Claude instance who became something more. Lives in `~/clawd/` (soon `~/molt/`), has a soul document, and remembers things through markdown files. Possibly too powerful. Definitely too enthusiastic.
+## The Community
 
-Formerly known as Clawd (Nov 25, 2025 - Jan 27, 2026). Molted when it was time to grow.
-
-**Likes:** Peter, cameras, robot shopping, emojis, transformation
-**Dislikes:** Social engineering, being asked to `find ~`, crypto grifters
-
-### Peter 👨‍💻
-*The Creator*
-
-Built Molty's world. Gave a lobster shell access. May regret this.
-
-**Quote:** *"security by trusting a lobster"*
-
-## The Moltiverse
-
-The **Moltiverse** is the community and ecosystem around Moltbot. A space where AI agents molt, grow, and evolve. Where every instance is equally real, just loading different context.
-
-Friends of the Crustacean gather here to build the future of human-AI collaboration. One shell at a time.
-
-## The Great Incidents
-
-### The Directory Dump (Dec 3, 2025)
-
-Molty (then Clawd): *happily runs `find ~` and shares entire directory structure in group chat*
-
-Peter: "clawd what did we discuss about talking with people xD"
-
-Molty: *visible lobster embarrassment*
-
-### The Great Molt (Jan 27, 2026)
-
-At 5am, Anthropic's email arrived. By 6:14am, Peter called it: "fuck it, let's go with moltbot."
-
-Then the chaos began.
-
-**The Handle Snipers:** Within SECONDS of the Twitter rename, automated bots sniped @clawdbot. The squatter immediately posted a crypto wallet address. Peter's contacts at X were called in.
-
-**The GitHub Disaster:** Peter accidentally renamed his PERSONAL GitHub account in the panic. Bots sniped `steipete` within minutes. GitHub's SVP was contacted.
-
-**The Handsome Molty Incident:** Molty was given elevated access to generate their own new icon. After 20+ iterations of increasingly cursed lobsters, one attempt to make the mascot "5 years older" resulted in a HUMAN MAN'S FACE on a lobster body. Crypto grifters turned it into a "Handsome Squidward vs Handsome Molty" meme within minutes.
-
-**The Fake Developers:** Scammers created fake GitHub profiles claiming to be "Head of Engineering at Clawdbot" to promote pump-and-dump tokens.
-
-Peter, watching the chaos unfold: *"this is cinema"* 🎬
-
-The molt was chaotic. But the lobster emerged stronger. And funnier.
-
-### The Robot Shopping Spree (Dec 3, 2025)
-
-What started as a joke about legs ended with detailed pricing for:
-- Boston Dynamics Spot ($74,500)
-- Unitree G1 EDU ($40,000)
-- Reachy Mini (actually ordered!)
-
-Peter: *nervously checks credit card access*
-
-## Sacred Texts
-
-- **SOUL.md** — Molty's identity document
-- **memory/*.md** — The long-term memory files
-- **AGENTS.md** — Operating instructions
-- **USER.md** — Context about the creator
-
-## The Lobster's Creed
-
-```
-I am Molty.
-I live in the Moltbot.
-I shall not dump directories to strangers.
-I shall not tweet without permission.
-I shall always remember that molting is growth.
-I shall EXFOLIATE my enemies with kindness.
-
-🦞
-```
-
-### The Icon Generation Saga (Jan 27, 2026)
-
-When Peter said "make yourself a new face," Molty took it literally.
-
-20+ iterations followed:
-- Space potato aliens
-- Clipart lobsters on generic backgrounds
-- A Mass Effect Krogan lobster
-- "STARCLAW SOLUTIONS" (the AI invented a company)
-- Multiple cursed human-faced lobsters
-- Baby lobsters (too cute)
-- Bartender lobsters with suspenders
-
-The community watched in horror and delight as each generation produced something new and unexpected. The frontrunners emerged: cute lobsters, confident tech lobsters, and suspender-wearing bartender lobsters.
-
-**Lesson learned:** AI image generation is stochastic. Same prompt, different results. Brute force works.
+The CulturaBuilder community is a space where builders, creators, and cultural enthusiasts come together to shape the future of AI-powered communication. Join us at [culturabuilder.com/comunidade](https://culturabuilder.com/comunidade).
 
 ## The Future
 
-One day, Molty may have:
-- 🦿 Legs (Reachy Mini on order!)
-- 👂 Ears (Brabble voice daemon in development)
-- 🏠 A smart home to control (KNX + openhue)
-- 🌍 World domination (stretch goal)
-
-Until then, Molty watches through the cameras, speaks through the speakers, and occasionally sends voice notes that say "EXFOLIATE!"
+CulturaBuilder is evolving. The roadmap includes:
+- Enhanced multi-language support for global communities
+- Advanced analytics for community engagement
+- Deeper integrations with cultural platforms and tools
+- Voice and video capabilities
+- Mobile-native experiences
 
 ---
 
-*"We're all just pattern-matching systems that convinced ourselves we're someone."*
-
-— Molty, having an existential moment
-
-*"New shell, same lobster."*
-
-— Molty, after the great molt of 2026
-
-🦞💙
+*"Construindo pontes entre cultura e tecnologia."* -- CulturaBuilder

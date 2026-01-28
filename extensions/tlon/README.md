@@ -1,5 +1,5 @@
-# Tlon (Clawdbot plugin)
+# Tlon (Culturabuilder plugin)
 
-Tlon/Urbit channel plugin for Clawdbot. Supports DMs, group mentions, and thread replies.
+Tlon/Urbit channel plugin for Culturabuilder. Supports DMs, group mentions, and thread replies.
 
-Docs: https://docs.molt.bot/channels/tlon
+Docs: https://docs.culturabuilder.com/channels/tlon

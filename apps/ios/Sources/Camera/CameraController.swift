@@ -1,5 +1,5 @@
 import AVFoundation
-import MoltbotKit
+import CulturabuilderKit
 import Foundation
 
 actor CameraController {
@@ -36,7 +36,7 @@ actor CameraController {
         }
     }
 
-    func snap(params: MoltbotCameraSnapParams) async throws -> (
+    func snap(params: CulturabuilderCameraSnapParams) async throws -> (
         format: String,
         base64: String,
         width: Int,
@@ -109,7 +109,7 @@ actor CameraController {
             height: res.heightPx)
     }
 
-    func clip(params: MoltbotCameraClipParams) async throws -> (
+    func clip(params: CulturabuilderCameraClipParams) async throws -> (
         format: String,
         base64: String,
         durationMs: Int,
@@ -161,9 +161,9 @@ actor CameraController {
         await Self.warmUpCaptureSession()
 
         let movURL = FileManager().temporaryDirectory
-            .appendingPathComponent("moltbot-camera-\(UUID().uuidString).mov")
+            .appendingPathComponent("culturabuilder-camera-\(UUID().uuidString).mov")
         let mp4URL = FileManager().temporaryDirectory
-            .appendingPathComponent("moltbot-camera-\(UUID().uuidString).mp4")
+            .appendingPathComponent("culturabuilder-camera-\(UUID().uuidString).mp4")
 
         defer {
             try? FileManager().removeItem(at: movURL)
@@ -221,7 +221,7 @@ actor CameraController {
     }
 
     private nonisolated static func pickCamera(
-        facing: MoltbotCameraFacing,
+        facing: CulturabuilderCameraFacing,
         deviceId: String?) -> AVCaptureDevice?
     {
         if let deviceId, !deviceId.isEmpty {

@@ -20,7 +20,8 @@ export function registerTuiCli(program: Command) {
     .option("--history-limit <n>", "History entries to load", "200")
     .addHelpText(
       "after",
-      () => `\n${theme.muted("Docs:")} ${formatDocsLink("/cli/tui", "docs.molt.bot/cli/tui")}\n`,
+      () =>
+        `\n${theme.muted("Docs:")} ${formatDocsLink("/cli/tui", "docs.culturabuilder.com/cli/tui")}\n`,
     )
     .action(async (opts) => {
       try {

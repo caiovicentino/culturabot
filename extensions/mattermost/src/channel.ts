@@ -8,7 +8,7 @@ import {
   normalizeAccountId,
   setAccountEnabledInConfigSection,
   type ChannelPlugin,
-} from "clawdbot/plugin-sdk";
+} from "culturabuilder/plugin-sdk";
 
 import { MattermostConfigSchema } from "./config-schema.js";
 import { resolveMattermostGroupRequireMention } from "./group-mentions.js";

@@ -1,9 +1,9 @@
 {
-  "name": "@moltbot/tlon",
+  "name": "@culturabuilder/tlon",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot Tlon/Urbit channel plugin",
-  "moltbot": {
+  "description": "Culturabuilder Tlon/Urbit channel plugin",
+  "culturabuilder": {
     "extensions": [
       "./index.ts"
     ],
@@ -18,7 +18,7 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "@moltbot/tlon",
+      "npmSpec": "@culturabuilder/tlon",
       "localPath": "extensions/tlon",
       "defaultChoice": "npm"
     }

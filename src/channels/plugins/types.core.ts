@@ -1,7 +1,7 @@
 import type { AgentTool, AgentToolResult } from "@mariozechner/pi-agent-core";
 import type { TSchema } from "@sinclair/typebox";
 import type { MsgContext } from "../../auto-reply/templating.js";
-import type { MoltbotConfig } from "../../config/config.js";
+import type { CulturabuilderConfig } from "../../config/config.js";
 import type { PollInput } from "../../polls.js";
 import type { GatewayClientMode, GatewayClientName } from "../../utils/message-channel.js";
 import type { NormalizedChatType } from "../chat-type.js";
@@ -14,7 +14,9 @@ export type ChannelOutboundTargetMode = "explicit" | "implicit" | "heartbeat";
 
 export type ChannelAgentTool = AgentTool<TSchema, unknown>;
 
-export type ChannelAgentToolFactory = (params: { cfg?: MoltbotConfig }) => ChannelAgentTool[];
+export type ChannelAgentToolFactory = (params: {
+  cfg?: CulturabuilderConfig;
+}) => ChannelAgentTool[];
 
 export type ChannelSetupInput = {
   name?: string;
@@ -149,7 +151,7 @@ export type ChannelLogSink = {
 };
 
 export type ChannelGroupContext = {
-  cfg: MoltbotConfig;
+  cfg: CulturabuilderConfig;
   groupId?: string | null;
   /** Human label for channel-like group conversations (e.g. #general). */
   groupChannel?: string | null;
@@ -186,7 +188,7 @@ export type ChannelSecurityDmPolicy = {
 };
 
 export type ChannelSecurityContext<ResolvedAccount = unknown> = {
-  cfg: MoltbotConfig;
+  cfg: CulturabuilderConfig;
   accountId?: string | null;
   account: ResolvedAccount;
 };
@@ -194,13 +196,13 @@ export type ChannelSecurityContext<ResolvedAccount = unknown> = {
 export type ChannelMentionAdapter = {
   stripPatterns?: (params: {
     ctx: MsgContext;
-    cfg: MoltbotConfig | undefined;
+    cfg: CulturabuilderConfig | undefined;
     agentId?: string;
   }) => string[];
   stripMentions?: (params: {
     text: string;
     ctx: MsgContext;
-    cfg: MoltbotConfig | undefined;
+    cfg: CulturabuilderConfig | undefined;
     agentId?: string;
   }) => string;
 };
@@ -214,13 +216,13 @@ export type ChannelStreamingAdapter = {
 
 export type ChannelThreadingAdapter = {
   resolveReplyToMode?: (params: {
-    cfg: MoltbotConfig;
+    cfg: CulturabuilderConfig;
     accountId?: string | null;
     chatType?: string | null;
   }) => "off" | "first" | "all";
   allowTagsWhenOff?: boolean;
   buildToolContext?: (params: {
-    cfg: MoltbotConfig;
+    cfg: CulturabuilderConfig;
     accountId?: string | null;
     context: ChannelThreadingContext;
     hasRepliedRef?: { value: boolean };
@@ -266,7 +268,7 @@ export type ChannelMessagingAdapter = {
 };
 
 export type ChannelAgentPromptAdapter = {
-  messageToolHints?: (params: { cfg: MoltbotConfig; accountId?: string | null }) => string[];
+  messageToolHints?: (params: { cfg: CulturabuilderConfig; accountId?: string | null }) => string[];
 };
 
 export type ChannelDirectoryEntryKind = "user" | "group" | "channel";
@@ -286,7 +288,7 @@ export type ChannelMessageActionName = ChannelMessageActionNameFromList;
 export type ChannelMessageActionContext = {
   channel: ChannelId;
   action: ChannelMessageActionName;
-  cfg: MoltbotConfig;
+  cfg: CulturabuilderConfig;
   params: Record<string, unknown>;
   accountId?: string | null;
   gateway?: {
@@ -307,10 +309,10 @@ export type ChannelToolSend = {
 };
 
 export type ChannelMessageActionAdapter = {
-  listActions?: (params: { cfg: MoltbotConfig }) => ChannelMessageActionName[];
+  listActions?: (params: { cfg: CulturabuilderConfig }) => ChannelMessageActionName[];
   supportsAction?: (params: { action: ChannelMessageActionName }) => boolean;
-  supportsButtons?: (params: { cfg: MoltbotConfig }) => boolean;
-  supportsCards?: (params: { cfg: MoltbotConfig }) => boolean;
+  supportsButtons?: (params: { cfg: CulturabuilderConfig }) => boolean;
+  supportsCards?: (params: { cfg: CulturabuilderConfig }) => boolean;
   extractToolSend?: (params: { args: Record<string, unknown> }) => ChannelToolSend | null;
   handleAction?: (ctx: ChannelMessageActionContext) => Promise<AgentToolResult<unknown>>;
 };
@@ -324,7 +326,7 @@ export type ChannelPollResult = {
 };
 
 export type ChannelPollContext = {
-  cfg: MoltbotConfig;
+  cfg: CulturabuilderConfig;
   to: string;
   poll: PollInput;
   accountId?: string | null;

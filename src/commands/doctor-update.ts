@@ -6,7 +6,9 @@ import { note } from "../terminal/note.js";
 import { formatCliCommand } from "../cli/command-format.js";
 import type { DoctorOptions } from "./doctor-prompter.js";
 
-async function detectMoltbotGitCheckout(root: string): Promise<"git" | "not-git" | "unknown"> {
+async function detectCulturabuilderGitCheckout(
+  root: string,
+): Promise<"git" | "not-git" | "unknown"> {
   const res = await runCommandWithTimeout(["git", "-C", root, "rev-parse", "--show-toplevel"], {
     timeoutMs: 5000,
   }).catch(() => null);
@@ -29,7 +31,7 @@ export async function maybeOfferUpdateBeforeDoctor(params: {
   confirm: (p: { message: string; initialValue: boolean }) => Promise<boolean>;
   outro: (message: string) => void;
 }) {
-  const updateInProgress = isTruthyEnvValue(process.env.CLAWDBOT_UPDATE_IN_PROGRESS);
+  const updateInProgress = isTruthyEnvValue(process.env.CULTURABUILDER_UPDATE_IN_PROGRESS);
   const canOfferUpdate =
     !updateInProgress &&
     params.options.nonInteractive !== true &&
@@ -38,10 +40,10 @@ export async function maybeOfferUpdateBeforeDoctor(params: {
     Boolean(process.stdin.isTTY);
   if (!canOfferUpdate || !params.root) return { updated: false };
 
-  const git = await detectMoltbotGitCheckout(params.root);
+  const git = await detectCulturabuilderGitCheckout(params.root);
   if (git === "git") {
     const shouldUpdate = await params.confirm({
-      message: "Update Moltbot from git before running doctor?",
+      message: "Update Culturabuilder from git before running doctor?",
       initialValue: true,
     });
     if (!shouldUpdate) return { updated: false };
@@ -72,7 +74,7 @@ export async function maybeOfferUpdateBeforeDoctor(params: {
     note(
       [
         "This install is not a git checkout.",
-        `Run \`${formatCliCommand("moltbot update")}\` to update via your package manager (npm/pnpm), then rerun doctor.`,
+        `Run \`${formatCliCommand("culturabuilder update")}\` to update via your package manager (npm/pnpm), then rerun doctor.`,
       ].join("\n"),
       "Update",
     );

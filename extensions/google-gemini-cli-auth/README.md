@@ -1,4 +1,4 @@
-# Google Gemini CLI Auth (Clawdbot plugin)
+# Google Gemini CLI Auth (Culturabuilder plugin)
 
 OAuth provider plugin for **Gemini CLI** (Google Code Assist).
 
@@ -7,7 +7,7 @@ OAuth provider plugin for **Gemini CLI** (Google Code Assist).
 Bundled plugins are disabled by default. Enable this one:
 
 ```bash
-clawdbot plugins enable google-gemini-cli-auth
+culturabuilder plugins enable google-gemini-cli-auth
 ```
 
 Restart the Gateway after enabling.
@@ -15,7 +15,7 @@ Restart the Gateway after enabling.
 ## Authenticate
 
 ```bash
-clawdbot models auth login --provider google-gemini-cli --set-default
+culturabuilder models auth login --provider google-gemini-cli --set-default
 ```
 
 ## Requirements
@@ -31,5 +31,5 @@ brew install gemini-cli
 
 Override auto-detected credentials with:
 
-- `CLAWDBOT_GEMINI_OAUTH_CLIENT_ID` / `GEMINI_CLI_OAUTH_CLIENT_ID`
-- `CLAWDBOT_GEMINI_OAUTH_CLIENT_SECRET` / `GEMINI_CLI_OAUTH_CLIENT_SECRET`
+- `CULTURABUILDER_GEMINI_OAUTH_CLIENT_ID` / `GEMINI_CLI_OAUTH_CLIENT_ID`
+- `CULTURABUILDER_GEMINI_OAUTH_CLIENT_SECRET` / `GEMINI_CLI_OAUTH_CLIENT_SECRET`

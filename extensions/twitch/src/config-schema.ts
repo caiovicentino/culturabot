@@ -1,4 +1,4 @@
-import { MarkdownConfigSchema } from "clawdbot/plugin-sdk";
+import { MarkdownConfigSchema } from "culturabuilder/plugin-sdk";
 import { z } from "zod";
 
 /**

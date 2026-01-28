@@ -1,12 +1,12 @@
-import type { MoltbotConfig } from "../config/config.js";
+import type { CulturabuilderConfig } from "../config/config.js";
 
 export type PluginEnableResult = {
-  config: MoltbotConfig;
+  config: CulturabuilderConfig;
   enabled: boolean;
   reason?: string;
 };
 
-function ensureAllowlisted(cfg: MoltbotConfig, pluginId: string): MoltbotConfig {
+function ensureAllowlisted(cfg: CulturabuilderConfig, pluginId: string): CulturabuilderConfig {
   const allow = cfg.plugins?.allow;
   if (!Array.isArray(allow) || allow.includes(pluginId)) return cfg;
   return {
@@ -18,7 +18,10 @@ function ensureAllowlisted(cfg: MoltbotConfig, pluginId: string): MoltbotConfig 
   };
 }
 
-export function enablePluginInConfig(cfg: MoltbotConfig, pluginId: string): PluginEnableResult {
+export function enablePluginInConfig(
+  cfg: CulturabuilderConfig,
+  pluginId: string,
+): PluginEnableResult {
   if (cfg.plugins?.enabled === false) {
     return { config: cfg, enabled: false, reason: "plugins disabled" };
   }
@@ -33,7 +36,7 @@ export function enablePluginInConfig(cfg: MoltbotConfig, pluginId: string): Plug
       enabled: true,
     },
   };
-  let next: MoltbotConfig = {
+  let next: CulturabuilderConfig = {
     ...cfg,
     plugins: {
       ...cfg.plugins,

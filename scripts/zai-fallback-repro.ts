@@ -75,10 +75,10 @@ async function main() {
   }
 
   const baseDir = await fs.mkdtemp(
-    path.join(os.tmpdir(), "moltbot-zai-fallback-"),
+    path.join(os.tmpdir(), "culturabuilder-zai-fallback-"),
   );
   const stateDir = path.join(baseDir, "state");
-  const configPath = path.join(baseDir, "moltbot.json");
+  const configPath = path.join(baseDir, "culturabuilder.json");
   await fs.mkdir(stateDir, { recursive: true });
 
   const config = {
@@ -98,12 +98,12 @@ async function main() {
   await fs.writeFile(configPath, JSON.stringify(config, null, 2), "utf8");
 
   const sessionId =
-    process.env.CLAWDBOT_ZAI_FALLBACK_SESSION_ID ?? randomUUID();
+    process.env.CULTURABUILDER_ZAI_FALLBACK_SESSION_ID ?? randomUUID();
 
   const baseEnv: NodeJS.ProcessEnv = {
     ...process.env,
-    CLAWDBOT_CONFIG_PATH: configPath,
-    CLAWDBOT_STATE_DIR: stateDir,
+    CULTURABUILDER_CONFIG_PATH: configPath,
+    CULTURABUILDER_STATE_DIR: stateDir,
     ZAI_API_KEY: zaiKey,
     Z_AI_API_KEY: "",
   };
@@ -127,7 +127,7 @@ async function main() {
   const run1 = await runCommand(
     "run1",
     [
-      "moltbot",
+      "culturabuilder",
       "agent",
       "--local",
       "--session-id",
@@ -159,7 +159,7 @@ async function main() {
   const run2 = await runCommand(
     "run2",
     [
-      "moltbot",
+      "culturabuilder",
       "agent",
       "--local",
       "--session-id",

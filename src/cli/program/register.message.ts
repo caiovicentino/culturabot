@@ -31,22 +31,22 @@ export function registerMessageCommands(program: Command, ctx: ProgramContext) {
         `
 ${theme.heading("Examples:")}
 ${formatHelpExamples([
-  ['moltbot message send --target +15555550123 --message "Hi"', "Send a text message."],
+  ['culturabuilder message send --target +15555550123 --message "Hi"', "Send a text message."],
   [
-    'moltbot message send --target +15555550123 --message "Hi" --media photo.jpg',
+    'culturabuilder message send --target +15555550123 --message "Hi" --media photo.jpg',
     "Send a message with media.",
   ],
   [
-    'moltbot message poll --channel discord --target channel:123 --poll-question "Snack?" --poll-option Pizza --poll-option Sushi',
+    'culturabuilder message poll --channel discord --target channel:123 --poll-question "Snack?" --poll-option Pizza --poll-option Sushi',
     "Create a Discord poll.",
   ],
   [
-    'moltbot message react --channel discord --target 123 --message-id 456 --emoji "✅"',
+    'culturabuilder message react --channel discord --target 123 --message-id 456 --emoji "✅"',
     "React to a message.",
   ],
 ])}
 
-${theme.muted("Docs:")} ${formatDocsLink("/cli/message", "docs.molt.bot/cli/message")}`,
+${theme.muted("Docs:")} ${formatDocsLink("/cli/message", "docs.culturabuilder.com/cli/message")}`,
     )
     .action(() => {
       message.help({ error: true });

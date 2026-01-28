@@ -1,9 +1,9 @@
 {
-  "name": "@moltbot/imessage",
+  "name": "@culturabuilder/imessage",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot iMessage channel plugin",
-  "moltbot": {
+  "description": "Culturabuilder iMessage channel plugin",
+  "culturabuilder": {
     "extensions": [
       "./index.ts"
     ]

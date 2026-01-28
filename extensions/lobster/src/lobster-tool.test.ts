@@ -4,10 +4,10 @@ import path from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-import type { MoltbotPluginApi, MoltbotPluginToolContext } from "../../../src/plugins/types.js";
+import type { CulturabuilderPluginApi, CulturabuilderPluginToolContext } from "../../../src/plugins/types.js";
 import { createLobsterTool } from "./lobster-tool.js";
 
-async function writeFakeLobsterScript(scriptBody: string, prefix = "moltbot-lobster-plugin-") {
+async function writeFakeLobsterScript(scriptBody: string, prefix = "culturabuilder-lobster-plugin-") {
   const dir = await fs.mkdtemp(path.join(os.tmpdir(), prefix));
   const isWindows = process.platform === "win32";
 
@@ -33,7 +33,7 @@ async function writeFakeLobster(params: { payload: unknown }) {
   return await writeFakeLobsterScript(scriptBody);
 }
 
-function fakeApi(): MoltbotPluginApi {
+function fakeApi(): CulturabuilderPluginApi {
   return {
     id: "lobster",
     name: "lobster",
@@ -52,7 +52,7 @@ function fakeApi(): MoltbotPluginApi {
   };
 }
 
-function fakeCtx(overrides: Partial<MoltbotPluginToolContext> = {}): MoltbotPluginToolContext {
+function fakeCtx(overrides: Partial<CulturabuilderPluginToolContext> = {}): CulturabuilderPluginToolContext {
   return {
     config: {} as any,
     workspaceDir: "/tmp",
@@ -89,7 +89,7 @@ describe("lobster plugin tool", () => {
       `const payload = ${JSON.stringify(payload)};\n` +
         `console.log("noise before json");\n` +
         `process.stdout.write(JSON.stringify(payload));\n`,
-      "moltbot-lobster-plugin-noisy-",
+      "culturabuilder-lobster-plugin-noisy-",
     );
 
     const tool = createLobsterTool(fakeApi());
@@ -117,7 +117,7 @@ describe("lobster plugin tool", () => {
   it("rejects invalid JSON from lobster", async () => {
     const { binPath } = await writeFakeLobsterScript(
       `process.stdout.write("nope");\n`,
-      "moltbot-lobster-plugin-bad-",
+      "culturabuilder-lobster-plugin-bad-",
     );
 
     const tool = createLobsterTool(fakeApi());
@@ -132,7 +132,7 @@ describe("lobster plugin tool", () => {
 
   it("can be gated off in sandboxed contexts", async () => {
     const api = fakeApi();
-    const factoryTool = (ctx: MoltbotPluginToolContext) => {
+    const factoryTool = (ctx: CulturabuilderPluginToolContext) => {
       if (ctx.sandboxed) return null;
       return createLobsterTool(api);
     };

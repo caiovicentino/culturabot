@@ -1,9 +1,9 @@
 {
-  "name": "@moltbot/line",
+  "name": "@culturabuilder/line",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot LINE channel plugin",
-  "moltbot": {
+  "description": "Culturabuilder LINE channel plugin",
+  "culturabuilder": {
     "extensions": [
       "./index.ts"
     ],
@@ -18,12 +18,12 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "@moltbot/line",
+      "npmSpec": "@culturabuilder/line",
       "localPath": "extensions/line",
       "defaultChoice": "npm"
     }
   },
   "devDependencies": {
-    "moltbot": "workspace:*"
+    "culturabuilder": "workspace:*"
   }
 }

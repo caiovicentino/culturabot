@@ -1,9 +1,9 @@
 {
-  "name": "@moltbot/mattermost",
+  "name": "@culturabuilder/mattermost",
   "version": "2026.1.26",
   "type": "module",
-  "description": "Moltbot Mattermost channel plugin",
-  "moltbot": {
+  "description": "Culturabuilder Mattermost channel plugin",
+  "culturabuilder": {
     "extensions": [
       "./index.ts"
     ],
@@ -17,7 +17,7 @@
       "order": 65
     },
     "install": {
-      "npmSpec": "@moltbot/mattermost",
+      "npmSpec": "@culturabuilder/mattermost",
       "localPath": "extensions/mattermost",
       "defaultChoice": "npm"
     }

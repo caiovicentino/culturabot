@@ -1,6 +1,6 @@
 import { detectBinary } from "../../../commands/onboard-helpers.js";
 import { installSignalCli } from "../../../commands/signal-install.js";
-import type { MoltbotConfig } from "../../../config/config.js";
+import type { CulturabuilderConfig } from "../../../config/config.js";
 import type { DmPolicy } from "../../../config/types.js";
 import { DEFAULT_ACCOUNT_ID, normalizeAccountId } from "../../../routing/session-key.js";
 import {
@@ -17,7 +17,7 @@ import { addWildcardAllowFrom, promptAccountId } from "./helpers.js";
 
 const channel = "signal" as const;
 
-function setSignalDmPolicy(cfg: MoltbotConfig, dmPolicy: DmPolicy) {
+function setSignalDmPolicy(cfg: CulturabuilderConfig, dmPolicy: DmPolicy) {
   const allowFrom =
     dmPolicy === "open" ? addWildcardAllowFrom(cfg.channels?.signal?.allowFrom) : undefined;
   return {
@@ -34,10 +34,10 @@ function setSignalDmPolicy(cfg: MoltbotConfig, dmPolicy: DmPolicy) {
 }
 
 function setSignalAllowFrom(
-  cfg: MoltbotConfig,
+  cfg: CulturabuilderConfig,
   accountId: string,
   allowFrom: string[],
-): MoltbotConfig {
+): CulturabuilderConfig {
   if (accountId === DEFAULT_ACCOUNT_ID) {
     return {
       ...cfg,
@@ -80,10 +80,10 @@ function isUuidLike(value: string): boolean {
 }
 
 async function promptSignalAllowFrom(params: {
-  cfg: MoltbotConfig;
+  cfg: CulturabuilderConfig;
   prompter: WizardPrompter;
   accountId?: string;
-}): Promise<MoltbotConfig> {
+}): Promise<CulturabuilderConfig> {
   const accountId =
     params.accountId && normalizeAccountId(params.accountId)
       ? (normalizeAccountId(params.accountId) ?? DEFAULT_ACCOUNT_ID)
@@ -282,9 +282,9 @@ export const signalOnboardingAdapter: ChannelOnboardingAdapter = {
 
     await prompter.note(
       [
-        'Link device with: signal-cli link -n "Moltbot"',
+        'Link device with: signal-cli link -n "Culturabuilder"',
         "Scan QR in Signal → Linked Devices",
-        `Then run: ${formatCliCommand("moltbot gateway call channels.status --params '{\"probe\":true}'")}`,
+        `Then run: ${formatCliCommand("culturabuilder gateway call channels.status --params '{\"probe\":true}'")}`,
         `Docs: ${formatDocsLink("/signal", "signal")}`,
       ].join("\n"),
       "Signal next steps",

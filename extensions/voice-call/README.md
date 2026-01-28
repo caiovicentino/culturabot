@@ -1,6 +1,6 @@
-# @clawdbot/voice-call
+# @culturabuilder/voice-call
 
-Official Voice Call plugin for **Clawdbot**.
+Official Voice Call plugin for **Culturabuilder**.
 
 Providers:
 - **Twilio** (Programmable Voice + Media Streams)
@@ -8,15 +8,15 @@ Providers:
 - **Plivo** (Voice API + XML transfer + GetInput speech)
 - **Mock** (dev/no network)
 
-Docs: `https://docs.molt.bot/plugins/voice-call`
-Plugin system: `https://docs.molt.bot/plugin`
+Docs: `https://docs.culturabuilder.com/plugins/voice-call`
+Plugin system: `https://docs.culturabuilder.com/plugin`
 
 ## Install (local dev)
 
-### Option A: install via Clawdbot (recommended)
+### Option A: install via Culturabuilder (recommended)
 
 ```bash
-clawdbot plugins install @clawdbot/voice-call
+culturabuilder plugins install @culturabuilder/voice-call
 ```
 
 Restart the Gateway afterwards.
@@ -24,9 +24,9 @@ Restart the Gateway afterwards.
 ### Option B: copy into your global extensions folder (dev)
 
 ```bash
-mkdir -p ~/.clawdbot/extensions
-cp -R extensions/voice-call ~/.clawdbot/extensions/voice-call
-cd ~/.clawdbot/extensions/voice-call && pnpm install
+mkdir -p ~/.culturabuilder/extensions
+cp -R extensions/voice-call ~/.culturabuilder/extensions/voice-call
+cd ~/.culturabuilder/extensions/voice-call && pnpm install
 ```
 
 ## Config
@@ -100,13 +100,13 @@ Notes:
 ## CLI
 
 ```bash
-clawdbot voicecall call --to "+15555550123" --message "Hello from Clawdbot"
-clawdbot voicecall continue --call-id <id> --message "Any questions?"
-clawdbot voicecall speak --call-id <id> --message "One moment"
-clawdbot voicecall end --call-id <id>
-clawdbot voicecall status --call-id <id>
-clawdbot voicecall tail
-clawdbot voicecall expose --mode funnel
+culturabuilder voicecall call --to "+15555550123" --message "Hello from Culturabuilder"
+culturabuilder voicecall continue --call-id <id> --message "Any questions?"
+culturabuilder voicecall speak --call-id <id> --message "One moment"
+culturabuilder voicecall end --call-id <id>
+culturabuilder voicecall status --call-id <id>
+culturabuilder voicecall tail
+culturabuilder voicecall expose --mode funnel
 ```
 
 ## Tool

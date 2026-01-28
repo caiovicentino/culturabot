@@ -12,7 +12,7 @@ const requiredPaths = [
   "dist/hooks/gmail.js",
   "dist/whatsapp/normalize.js",
 ];
-const forbiddenPrefixes = ["dist/Moltbot.app/"];
+const forbiddenPrefixes = ["dist/Culturabuilder.app/"];
 
 type PackageJson = {
   name?: string;
