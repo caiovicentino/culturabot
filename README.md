@@ -13,7 +13,7 @@
 
 <p align="center">
   <a href="https://github.com/caiovicentino/culturabot/stargazers"><img src="https://img.shields.io/github/stars/caiovicentino/culturabot?style=for-the-badge&color=F59E0B" alt="GitHub Stars"></a>
-  <a href="https://culturabuilder.com"><img src="https://img.shields.io/badge/Comunidade-2.000%2B%20builders-8B5CF6?style=for-the-badge" alt="Membros da Comunidade"></a>
+  <a href="https://culturabuilder.com"><img src="https://img.shields.io/badge/Comunidade-6.600%2B%20builders-8B5CF6?style=for-the-badge" alt="Membros da Comunidade"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/Licen%C3%A7a-MIT-22C55E?style=for-the-badge" alt="Licenca MIT"></a>
 </p>
 
